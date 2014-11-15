@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+     
+      
+    <h:head>
+        <title>eliminar usuario</title>
+    </h:head>
+    <h:body>
+       
+        
+            
+            <h:form>
+                <p:growl />
+                <p:growl/>
+                <p:outputLabel value="eliminar usuario por login/nombre"/>
+                <p:inputText id="i1" value="#{beanUsuario.login}"
+                             required="true"
+                             requiredMessage="el campo de búsqueda no puede estar vacío"/>   <!--meter autocompletar-->
+                
+                
+                <p:commandButton value="eliminar usuario" action="#{beanUsuario.eliminaUsuario()}" ajax="false" />  <!--con ajax no funciona-->
+                
+               
+                
+            </h:form>
+            
+        
+        
+        <h:outputLink value="index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+        
+         
+        
+        
+        
+        
+        
+    </h:body>
+</html>

@@ -16,7 +16,7 @@
             </p:column>
             <p:column headerText="mensaje">
                 
-                <ui:repeat value="#{usuario.mensajeSet.toArray()}" var="mensaje">
+                <ui:repeat value="#{usuario.mensajeSet1.toArray()}" var="mensaje">
                     <h:outputText value="#{mensaje.tema}"/>
                     <br/>
                 </ui:repeat>
@@ -28,6 +28,20 @@
         
         
         <br />
+        
+        
+        <h:outputLink value="principalAdmin.xhtml">administracion</h:outputLink>
+        <br/>
+        <br/>
+        <h:outputLink value="principalUsuario.xhtml">usuario</h:outputLink>
+        
+        
+        
+        
+        
+        <br /><br/>
+        
+        <h:outputLink value="equivalenciasPublicas.xhtml">Equivalencias públicas</h:outputLink>
         
     </h:body>
 </html>

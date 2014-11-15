@@ -54,8 +54,8 @@ public class CrearUsuarioController implements Serializable{
         listaUsuarios=new ArrayList<Usuario>();
         listaUsuarios.addAll(usuarioService.listar());
         listaMensajes=new ArrayList<Mensaje>();
-        listaMensajes.addAll(listaUsuarios.get(0).getMensajeSet1());
-        System.out.println(listaMensajes.size());
+        //listaMensajes.addAll(listaUsuarios.get(0).getMensajeSet1());
+        //System.out.println(listaMensajes.size());
         
     }
     
