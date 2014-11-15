@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author cba
+ * @author abc
  */
 @Entity
 @Table(name = "contrato")
@@ -45,17 +45,17 @@ public class Contrato implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idContrato", nullable = false)
+    @Column(name = "idContrato")
     private Integer idContrato;
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     @Size(max = 10)
-    @Column(name = "estado", length = 10)
+    @Column(name = "estado")
     private String estado;
     @JoinTable(name = "contrato_equivalencia", joinColumns = {
-        @JoinColumn(name = "idContrato", referencedColumnName = "idContrato", nullable = false)}, inverseJoinColumns = {
-        @JoinColumn(name = "idEquivalencia", referencedColumnName = "idequivalencia", nullable = false)})
+        @JoinColumn(name = "idContrato", referencedColumnName = "idContrato")}, inverseJoinColumns = {
+        @JoinColumn(name = "idEquivalencia", referencedColumnName = "idequivalencia")})
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Equivalencia> equivalenciaSet;
     @JoinColumn(name = "idMovilidad", referencedColumnName = "codMovilidad")

@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author cba
+ * @author abc
  */
 @Entity
 @Table(name = "asignatura")
@@ -44,29 +44,29 @@ public class Asignatura implements Serializable {
     @EmbeddedId
     protected AsignaturaPK asignaturaPK;
     @Size(max = 50)
-    @Column(name = "nombreAsignatura", length = 50)
+    @Column(name = "nombreAsignatura")
     private String nombreAsignatura;
     @Column(name = "creditos")
     private Short creditos;
     @Size(max = 10)
-    @Column(name = "periodo", length = 10)
+    @Column(name = "periodo")
     private String periodo;
     @Lob
     @Size(max = 2147483647)
-    @Column(name = "infoAsigantura", length = 2147483647)
+    @Column(name = "infoAsigantura")
     private String infoAsigantura;
     @Size(max = 200)
-    @Column(name = "webAsignatura", length = 200)
+    @Column(name = "webAsignatura")
     private String webAsignatura;
     @Size(max = 50)
-    @Column(name = "facultad", length = 50)
+    @Column(name = "facultad")
     private String facultad;
     @Size(max = 45)
-    @Column(name = "titulacion", length = 45)
+    @Column(name = "titulacion")
     private String titulacion;
     @OneToMany(mappedBy = "asignatura", fetch = FetchType.LAZY)
     private Set<MiembroGrupoAsignaturaB> miembroGrupoAsignaturaBSet;
-    @JoinColumn(name = "nombreUniversidad", referencedColumnName = "nombre", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "nombreUniversidad", referencedColumnName = "nombre", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Universidad universidad;
     @OneToMany(mappedBy = "asignatura", fetch = FetchType.LAZY)

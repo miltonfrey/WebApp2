@@ -20,7 +20,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -28,12 +27,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author cba
+ * @author abc
  */
 @Entity
-@Table(name = "universidad", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"nombre"}),
-    @UniqueConstraint(columnNames = {"codUniversidad"})})
+@Table(name = "universidad")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Universidad.findAll", query = "SELECT u FROM Universidad u"),
@@ -46,19 +43,19 @@ public class Universidad implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre", nullable = false, length = 45)
+    @Column(name = "nombre")
     private String nombre;
     @Lob
     @Size(max = 2147483647)
-    @Column(name = "info", length = 2147483647)
+    @Column(name = "info")
     private String info;
     @Size(max = 50)
-    @Column(name = "web", length = 50)
+    @Column(name = "web")
     private String web;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 15)
-    @Column(name = "codUniversidad", nullable = false, length = 15)
+    @Column(name = "codUniversidad")
     private String codUniversidad;
     @JoinColumn(name = "pais", referencedColumnName = "nombre")
     @ManyToOne(fetch = FetchType.LAZY)

@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author cba
+ * @author abc
  */
 @Entity
 @Table(name = "usuario")
@@ -44,34 +44,34 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "login", nullable = false, length = 20)
+    @Column(name = "login")
     private String login;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
-    @Column(name = "password", nullable = false, length = 40)
+    @Column(name = "password")
     private String password;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "tipo_usuario", nullable = false)
+    @Column(name = "tipo_usuario")
     private short tipoUsuario;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
-    @Column(name = "titulacion", nullable = false, length = 25)
+    @Column(name = "titulacion")
     private String titulacion;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombre", nullable = false, length = 45)
+    @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "apellido1", nullable = false, length = 45)
+    @Column(name = "apellido1")
     private String apellido1;
     @Size(max = 45)
-    @Column(name = "apellido2", length = 45)
+    @Column(name = "apellido2")
     private String apellido2;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "origen", fetch = FetchType.LAZY)
     private Set<Mensaje> mensajeSet;

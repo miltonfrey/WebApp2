@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author cba
+ * @author abc
  */
 @Entity
 @Table(name = "grupo_asignatura_b")
@@ -38,11 +38,11 @@ public class GrupoAsignaturaB implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idequivalencia", nullable = false)
+    @Column(name = "idequivalencia")
     private Integer idequivalencia;
     @OneToMany(mappedBy = "idGrupoAsignaturaB", fetch = FetchType.LAZY)
     private Set<MiembroGrupoAsignaturaB> miembroGrupoAsignaturaBSet;
-    @JoinColumn(name = "idequivalencia", referencedColumnName = "idequivalencia", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "idequivalencia", referencedColumnName = "idequivalencia", insertable = false, updatable = false)
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Equivalencia equivalencia;
 

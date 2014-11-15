@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author cba
+ * @author abc
  */
 @Entity
 @Table(name = "equivalencia")
@@ -40,10 +40,10 @@ public class Equivalencia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idequivalencia", nullable = false)
+    @Column(name = "idequivalencia")
     private Integer idequivalencia;
     @Size(max = 2)
-    @Column(name = "visible", length = 2)
+    @Column(name = "visible")
     private String visible;
     @ManyToMany(mappedBy = "equivalenciaSet", fetch = FetchType.LAZY)
     private Set<Contrato> contratoSet;

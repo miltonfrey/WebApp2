@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author cba
+ * @author abc
  */
 @Entity
 @Table(name = "miembro_grupo_asignatura_b")
@@ -36,7 +36,7 @@ public class MiembroGrupoAsignaturaB implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idmiembro_grupo_asignatura_b", nullable = false)
+    @Column(name = "idmiembro_grupo_asignatura_b")
     private Integer idmiembroGrupoAsignaturaB;
     @JoinColumn(name = "idGrupoAsignaturaB", referencedColumnName = "idequivalencia")
     @ManyToOne(fetch = FetchType.LAZY)

@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author cba
+ * @author abc
  */
 @Entity
 @Table(name = "estado")
@@ -33,7 +33,7 @@ public class Estado implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 15)
-    @Column(name = "estado", nullable = false, length = 15)
+    @Column(name = "estado")
     private String estado;
 
     public Estado() {

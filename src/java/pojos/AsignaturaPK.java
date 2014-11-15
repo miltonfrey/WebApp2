@@ -14,18 +14,18 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author cba
+ * @author abc
  */
 @Embeddable
 public class AsignaturaPK implements Serializable {
     @Basic(optional = false)
     @NotNull
-    @Column(name = "codAsignatura", nullable = false)
+    @Column(name = "codAsignatura")
     private int codAsignatura;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "nombreUniversidad", nullable = false, length = 45)
+    @Column(name = "nombreUniversidad")
     private String nombreUniversidad;
 
     public AsignaturaPK() {

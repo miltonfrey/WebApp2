@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author cba
+ * @author abc
  */
 @Entity
 @Table(name = "movilidad")
@@ -46,29 +46,29 @@ public class Movilidad implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "codMovilidad", nullable = false)
+    @Column(name = "codMovilidad")
     private Integer codMovilidad;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fechaInicio", nullable = false)
+    @Column(name = "fechaInicio")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaInicio;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fechaFin", nullable = false)
+    @Column(name = "fechaFin")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaFin;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "estado", nullable = false, length = 10)
+    @Column(name = "estado")
     private String estado;
     @OneToMany(mappedBy = "idMovilidad", fetch = FetchType.LAZY)
     private Set<Contrato> contratoSet;
-    @JoinColumn(name = "loginUsuario", referencedColumnName = "login", nullable = false)
+    @JoinColumn(name = "loginUsuario", referencedColumnName = "login")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario loginUsuario;
-    @JoinColumn(name = "nombreUniversidad", referencedColumnName = "nombre", nullable = false)
+    @JoinColumn(name = "nombreUniversidad", referencedColumnName = "nombre")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Universidad nombreUniversidad;
     @JoinColumn(name = "cursoAcademico", referencedColumnName = "cursoAcademico")

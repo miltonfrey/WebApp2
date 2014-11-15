@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author cba
+ * @author abc
  */
 @Entity
 @Table(name = "mensaje")
@@ -45,42 +45,42 @@ public class Mensaje implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idmensaje", nullable = false)
+    @Column(name = "idmensaje")
     private Integer idmensaje;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "fecha", nullable = false)
+    @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     @Lob
     @Size(max = 16777215)
-    @Column(name = "tema", length = 16777215)
+    @Column(name = "tema")
     private String tema;
     @Basic(optional = false)
     @NotNull
     @Lob
     @Size(min = 1, max = 2147483647)
-    @Column(name = "texto", nullable = false, length = 2147483647)
+    @Column(name = "texto")
     private String texto;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2)
-    @Column(name = "leidoDestino", nullable = false, length = 2)
+    @Column(name = "leidoDestino")
     private String leidoDestino;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2)
-    @Column(name = "eliminadoOrigen", nullable = false, length = 2)
+    @Column(name = "eliminadoOrigen")
     private String eliminadoOrigen;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2)
-    @Column(name = "eliminadoDestino", nullable = false, length = 2)
+    @Column(name = "eliminadoDestino")
     private String eliminadoDestino;
-    @JoinColumn(name = "origen", referencedColumnName = "login", nullable = false)
+    @JoinColumn(name = "origen", referencedColumnName = "login")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario origen;
-    @JoinColumn(name = "destino", referencedColumnName = "login", nullable = false)
+    @JoinColumn(name = "destino", referencedColumnName = "login")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario destino;
 

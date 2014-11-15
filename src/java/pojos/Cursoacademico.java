@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author cba
+ * @author abc
  */
 @Entity
 @Table(name = "cursoacademico")
@@ -37,7 +37,7 @@ public class Cursoacademico implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "cursoAcademico", nullable = false, length = 10)
+    @Column(name = "cursoAcademico")
     private String cursoAcademico;
     @OneToMany(mappedBy = "cursoAcademico", fetch = FetchType.LAZY)
     private Set<Movilidad> movilidadSet;
