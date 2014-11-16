@@ -20,13 +20,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     
     @Override
     public List<Usuario> listar(){
-        
-        /*List<Usuario> lista=new ArrayList<Usuario>();
-        Short u=1;
-        lista.add(new Usuario("ssss", "abc", u, "hshs", "sjfs", "sdfs"));
-        return lista;
        
-        */
         
         return usuarioDao.listar();
     }
