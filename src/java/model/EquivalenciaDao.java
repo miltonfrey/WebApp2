@@ -27,7 +27,7 @@ public interface EquivalenciaDao {
    public void eliminarEquivalencia(Equivalencia e);
     public void actualizarEquivalencia(Equivalencia e);
     public List<Equivalencia> listarEquivalencias();
-    public List<Equivalencia> listarEquivalenciasPorContrato(Integer id);
+    //public List<Equivalencia> listarEquivalenciasPorContrato(Integer id);
     
     public void insertarGrupoAsignaturasA(GrupoAsignaturaA grupo);
     public void insertarGrupoAsignaturasB(GrupoAsignaturaB grupo);
