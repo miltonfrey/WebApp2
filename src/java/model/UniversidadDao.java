@@ -30,8 +30,6 @@ public interface UniversidadDao {
     public void actualizar(Universidad u);
     public List<Universidad> listarPorUniversidad(String universidad);
     public List<Universidad> listarPorPais(String pais);
-   public List<String> listarPorUniversidadStr(String universidad);
-   public List<String> listarPorPaisStr(String pais);
    public void crearCursoAcademico(Cursoacademico c); 
    public void eliminarCursoAcademico(Cursoacademico c);
    public List<Cursoacademico> listaCursosAcademicos();

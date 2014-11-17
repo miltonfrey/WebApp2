@@ -20,7 +20,7 @@ import pojos.EstadoMovilidad;
 @Stateless
 public class UtilidadServiceImpl implements UtilidadService {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "WebApp2PU")
     private EntityManager entityManager;
     
 
@@ -39,7 +39,7 @@ public class UtilidadServiceImpl implements UtilidadService {
     }
     @Override
     public void eliminaEstado(Estado e){
-        entityManager.detach(e);
+        entityManager.remove(e);
                 
     }
     
@@ -60,7 +60,7 @@ public class UtilidadServiceImpl implements UtilidadService {
     
     @Override
     public void eliminaEstadoMovilidad(EstadoMovilidad e){
-        entityManager.detach(e);
+        entityManager.remove(e);
     }
     
     @Override
@@ -77,7 +77,7 @@ public class UtilidadServiceImpl implements UtilidadService {
     }
     @Override
     public void eliminaCursoAcademico(Cursoacademico c){
-        entityManager.detach(c);
+        entityManager.remove(c);
     }
     
     
