@@ -15,10 +15,7 @@ import pojos.Cursoacademico;
 import pojos.Pais;
 import pojos.Universidad;
 
-/**
- *
- * @author cba
- */
+
 @Named(value = "universidadDaoImpl")
 @RequestScoped
 public class UniversidadDaoImpl implements UniversidadDao{
