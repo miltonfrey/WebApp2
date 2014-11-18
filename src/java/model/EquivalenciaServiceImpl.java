@@ -10,9 +10,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
 import pojos.Asignatura;
 import pojos.Contrato;
 import pojos.Equivalencia;
@@ -30,8 +29,10 @@ import pojos.utillidades.EquivalenciaRevisada;
 @Stateless
 public class EquivalenciaServiceImpl implements EquivalenciaService{
 
-    @Inject
+    @EJB
     private EquivalenciaDao equivalenciaDao;
+    
+   
     
     
     @Override

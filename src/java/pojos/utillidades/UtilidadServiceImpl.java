@@ -5,29 +5,22 @@
  */
 package pojos.utillidades;
 
+
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import pojos.Cursoacademico;
 import pojos.Estado;
 import pojos.EstadoMovilidad;
 
-/**
- *
- * @author abc
- */
+
 @Stateless
 public class UtilidadServiceImpl implements UtilidadService {
 
     @PersistenceContext(unitName = "WebApp2PU")
     private EntityManager entityManager;
-    
-
-   
-    
-    
-    
     
     @Override
     public void crearEstado(Estado e){

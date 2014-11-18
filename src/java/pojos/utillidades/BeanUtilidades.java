@@ -5,11 +5,13 @@ package pojos.utillidades;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
+
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import pojos.Cursoacademico;
@@ -17,14 +19,16 @@ import pojos.Estado;
 import pojos.EstadoMovilidad;
 
 
-
-@ManagedBean
-@ViewScoped
+@Named(value = "beanUtilidades")
+@RequestScoped
 public class BeanUtilidades implements Serializable{
 
-    @ManagedProperty(value="#{utilidadService}")
-    private transient UtilidadService utilidadService;
-
+    
+    public BeanUtilidades() {
+    }
+   
+    @EJB
+    private UtilidadService utilidadService;
     
     private ArrayList<Estado> listaEstados;
     private String estado;
@@ -36,8 +40,7 @@ public class BeanUtilidades implements Serializable{
     private ArrayList<Cursoacademico> listaCursoAcademico;
     
     
-    public BeanUtilidades() {
-    }
+    
     
     
     @PostConstruct
@@ -252,3 +255,6 @@ public class BeanUtilidades implements Serializable{
         }
     
 }
+
+    
+
