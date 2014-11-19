@@ -38,7 +38,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Override
     public List<Usuario>listar(){
         
-        List<Usuario> lista= (ArrayList<Usuario>)usuarioDao.listar();
+        List<Usuario> lista=usuarioDao.listar();
         Usuario u=usuarioDao.find("admin");
         lista.remove(u);
         return lista;

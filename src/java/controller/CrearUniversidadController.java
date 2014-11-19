@@ -2,6 +2,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.inject.Named;
@@ -39,7 +40,7 @@ public class CrearUniversidadController {
     private String paisStrEdit;
     
     private ArrayList<Pais> listaPaises;
-    private ArrayList<Universidad> listaUniversidades;
+    private List<Universidad> listaUniversidades;
     private ArrayList<Universidad> selectedUniversidades;
     
     private boolean checkPaisStr;
@@ -120,13 +121,15 @@ public class CrearUniversidadController {
         this.listaPaises = listaPaises;
     }
 
-    public ArrayList<Universidad> getListaUniversidades() {
+    public List<Universidad> getListaUniversidades() {
         return listaUniversidades;
     }
 
-    public void setListaUniversidades(ArrayList<Universidad> listaUniversidades) {
+    public void setListaUniversidades(List<Universidad> listaUniversidades) {
         this.listaUniversidades = listaUniversidades;
     }
+
+   
 
     public ArrayList<Universidad> getSelectedUniversidades() {
         return selectedUniversidades;
@@ -186,7 +189,7 @@ public class CrearUniversidadController {
     public void onChangePais(){
         
         
-        listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
+        setListaUniversidades(universidadService.listarPorPais(paisStr));
         
     }
     

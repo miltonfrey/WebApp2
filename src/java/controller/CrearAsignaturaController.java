@@ -3,6 +3,7 @@ package controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -54,9 +55,9 @@ public class CrearAsignaturaController implements Serializable{
     private String titulacionAsignatura;
     
     
-    private ArrayList<Pais> listaPaises;
-    private ArrayList<Universidad> listaUniversidades;
-    private ArrayList<Asignatura> listaAsignaturas;
+    private List<Pais> listaPaises;
+    private List<Universidad> listaUniversidades;
+    private List<Asignatura> listaAsignaturas;
     
     private boolean checkPaisStr;
     private boolean checkUniversidadStr;
@@ -73,7 +74,7 @@ public class CrearAsignaturaController implements Serializable{
     @PostConstruct
     public void init(){
         
-        setListaPaises((ArrayList<Pais>)universidadService.listaPaises());
+        setListaPaises(universidadService.listaPaises());
         
     }
     
@@ -97,6 +98,30 @@ public class CrearAsignaturaController implements Serializable{
         this.universidadStr = universidadStr;
     }
 
+    public List<Pais> getListaPaises() {
+        return listaPaises;
+    }
+
+    public void setListaPaises(List<Pais> listaPaises) {
+        this.listaPaises = listaPaises;
+    }
+
+    public List<Universidad> getListaUniversidades() {
+        return listaUniversidades;
+    }
+
+    public void setListaUniversidades(List<Universidad> listaUniversidades) {
+        this.listaUniversidades = listaUniversidades;
+    }
+
+    public List<Asignatura> getListaAsignaturas() {
+        return listaAsignaturas;
+    }
+
+    public void setListaAsignaturas(List<Asignatura> listaAsignaturas) {
+        this.listaAsignaturas = listaAsignaturas;
+    }
+
     
     
     
@@ -112,38 +137,10 @@ public class CrearAsignaturaController implements Serializable{
     public void onChangePaisUni(){
     
     
-    listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
+        setListaUniversidades(universidadService.listarPorPais(paisStr));
 }
    
    
-    public ArrayList<Pais> getListaPaises() {
-        return listaPaises;
-    }
-
-    public void setListaPaises(ArrayList<Pais> listaPaises) {
-        this.listaPaises = listaPaises;
-    }
-   
- public ArrayList<Universidad> getListaUniversidades() {
-       
-        return listaUniversidades;
-    }
-
-    public void setListaUniversidades(ArrayList<Universidad> listaUniversidades) {
-        this.listaUniversidades = listaUniversidades;
-    }
-
-    public ArrayList<Asignatura> getListaAsignaturas() {
-        return listaAsignaturas;
-    }
-
-    public void setListaAsignaturas(ArrayList<Asignatura> listaAsignaturas) {
-        this.listaAsignaturas = listaAsignaturas;
-    }
-   
-    
-    
-    
     
      public Universidad getSelectedUniversidad() {
         return selectedUniversidad;
@@ -246,7 +243,7 @@ public class CrearAsignaturaController implements Serializable{
        
        
        checkPaisStr=true;
-       listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
+       setListaUniversidades(universidadService.listarPorPais(paisStr));
        universidadStr="";
        checkDetalles=false;
        checkUniversidadStr=false;
@@ -259,7 +256,7 @@ public class CrearAsignaturaController implements Serializable{
         
         checkUniversidadStr=true;
         checkTabla=true;
-        listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
+        setListaAsignaturas( asignaturaService.listarAsignaturasPorUniversidad(universidadStr));
         //listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarPorCriterio();
        checkDetalles=false;
        
@@ -306,7 +303,7 @@ public class CrearAsignaturaController implements Serializable{
         facultadAsignatura="";
         infoAsignatura="";
         webAsignatura="";
-        listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
+        setListaAsignaturas( asignaturaService.listarAsignaturasPorUniversidad(universidadStr));
         
         return null;
     }
@@ -324,7 +321,7 @@ public class CrearAsignaturaController implements Serializable{
     public String editar(){
         try{
             asignaturaService.actualizarAsignatura(SelectedAsignatura);
-            listaAsignaturas=(ArrayList < Asignatura >)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
+           setListaAsignaturas( asignaturaService.listarAsignaturasPorUniversidad(universidadStr));
         }catch(RuntimeException ex){
             beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_INFO);
             return "crearAsignatura.xhtml";
@@ -362,7 +359,7 @@ public class CrearAsignaturaController implements Serializable{
         }
         
         beanUtilidades.creaMensaje("se han eliminado correctamente las asignaturas",FacesMessage.SEVERITY_INFO);
-        listaAsignaturas=(ArrayList < Asignatura >)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
+        setListaAsignaturas( asignaturaService.listarAsignaturasPorUniversidad(universidadStr));
         //checkUniversidadStr=false;
         checkDetalles=false;
         return null;

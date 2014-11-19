@@ -36,8 +36,8 @@ public class EliminarUsuarioController implements Serializable{
    
     @PostConstruct
     public void init(){
-        
-        setListaUsuarios((ArrayList < Usuario >)usuarioService.listar());
+        listaUsuarios=new ArrayList<Usuario>();
+        listaUsuarios.addAll(usuarioService.listar());
         
     }
 

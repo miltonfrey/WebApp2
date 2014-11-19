@@ -20,19 +20,19 @@
             <p:growl/>
             
                   <p:outputLabel value="login"/>
-                  <p:inputText value="#{autenticarAdminBean.login}"
+                  <p:inputText value="#{autenticarAdminController.login}"
                          required="true"
                          requiredMessage="el campo login esta vacio"
                          autocomplete="false"/>
                       
            
             <p:outputLabel value="password"/>
-            <p:password value="#{autenticarAdminBean.password}"
+            <p:password value="#{autenticarAdminController.password}"
                         required="true"
                         requiredMessage="el campo password esta vacio"/>
            
             
-            <p:commandButton value="autenticar" action="#{autenticarAdminBean.autenticarAdmin}" ajax="false"/>
+            <p:commandButton value="autenticar" action="#{autenticarAdminController.autenticarAdmin}" ajax="false"/>
                 </h:panelGrid>
             
         </h:form>

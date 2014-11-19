@@ -3,7 +3,7 @@ package pojos.utillidades;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -30,14 +30,14 @@ public class BeanUtilidades implements Serializable{
     @EJB
     private UtilidadService utilidadService;
     
-    private ArrayList<Estado> listaEstados;
+    private List<Estado> listaEstados;
     private String estado;
     
-    private ArrayList<EstadoMovilidad> listaEstadosMovilidad;
+    private List<EstadoMovilidad> listaEstadosMovilidad;
     private String estadoMovilidad;
     
     private String cursoAcademico;
-    private ArrayList<Cursoacademico> listaCursoAcademico;
+    private List<Cursoacademico> listaCursoAcademico;
     
     
     
@@ -49,20 +49,14 @@ public class BeanUtilidades implements Serializable{
         
        
             
-            setListaEstados((ArrayList < Estado >)utilidadService.listaEstados());
+            setListaEstados(utilidadService.listaEstados());
        
-            setListaEstadosMovilidad((ArrayList < EstadoMovilidad >)utilidadService.listaEstadosMovilidad());
-            setListaCursoAcademico((ArrayList<Cursoacademico>)utilidadService.listaCursoAcademico());
+            setListaEstadosMovilidad(utilidadService.listaEstadosMovilidad());
+            setListaCursoAcademico(utilidadService.listaCursoAcademico());
         
     }
 
-    public ArrayList<Estado> getListaEstados() {
-        return listaEstados;
-    }
-
-    public void setListaEstados(ArrayList<Estado> listaEstados) {
-        this.listaEstados = listaEstados;
-    }
+   
 
     public String getEstado() {
         return estado;
@@ -72,13 +66,7 @@ public class BeanUtilidades implements Serializable{
         this.estado = estado;
     }
 
-    public ArrayList<EstadoMovilidad> getListaEstadosMovilidad() {
-        return listaEstadosMovilidad;
-    }
-
-    public void setListaEstadosMovilidad(ArrayList<EstadoMovilidad> listaEstadosMovilidad) {
-        this.listaEstadosMovilidad = listaEstadosMovilidad;
-    }
+    
 
     public String getEstadoMovilidad() {
         return estadoMovilidad;
@@ -96,13 +84,31 @@ public class BeanUtilidades implements Serializable{
         this.cursoAcademico = cursoAcademico;
     }
 
-    public ArrayList<Cursoacademico> getListaCursoAcademico() {
+    public List<Estado> getListaEstados() {
+        return listaEstados;
+    }
+
+    public void setListaEstados(List<Estado> listaEstados) {
+        this.listaEstados = listaEstados;
+    }
+
+    public List<EstadoMovilidad> getListaEstadosMovilidad() {
+        return listaEstadosMovilidad;
+    }
+
+    public void setListaEstadosMovilidad(List<EstadoMovilidad> listaEstadosMovilidad) {
+        this.listaEstadosMovilidad = listaEstadosMovilidad;
+    }
+
+    public List<Cursoacademico> getListaCursoAcademico() {
         return listaCursoAcademico;
     }
 
-    public void setListaCursoAcademico(ArrayList<Cursoacademico> listaCursoAcademico) {
+    public void setListaCursoAcademico(List<Cursoacademico> listaCursoAcademico) {
         this.listaCursoAcademico = listaCursoAcademico;
     }
+
+    
     
     
     
@@ -119,7 +125,7 @@ public class BeanUtilidades implements Serializable{
             return null;
         }
         creaMensaje("estado creado o modificado", FacesMessage.SEVERITY_INFO);
-        setListaEstados((ArrayList < Estado >)utilidadService.listaEstados());
+        setListaEstados(utilidadService.listaEstados());
         estado="";
         return null;
         
@@ -140,7 +146,7 @@ public class BeanUtilidades implements Serializable{
         
         creaMensaje("estado eliminado", FacesMessage.SEVERITY_INFO);
         estado="";
-        setListaEstados((ArrayList < Estado >)utilidadService.listaEstados());
+        setListaEstados(utilidadService.listaEstados());
         return null;
     }
     
@@ -155,7 +161,7 @@ public class BeanUtilidades implements Serializable{
             return null;
         }
         creaMensaje("estado guardado", FacesMessage.SEVERITY_INFO);
-        listaEstadosMovilidad=(ArrayList < EstadoMovilidad >)utilidadService.listaEstadosMovilidad();
+        listaEstadosMovilidad=(utilidadService.listaEstadosMovilidad());
         estadoMovilidad="";
         return null;
     }
@@ -172,7 +178,7 @@ public class BeanUtilidades implements Serializable{
         }
         
         creaMensaje("estado eliminado", FacesMessage.SEVERITY_INFO);
-        listaEstadosMovilidad=(ArrayList < EstadoMovilidad >)utilidadService.listaEstadosMovilidad();
+        listaEstadosMovilidad=(utilidadService.listaEstadosMovilidad());
         estadoMovilidad="";
         return null;
     }
@@ -199,7 +205,7 @@ public class BeanUtilidades implements Serializable{
       }
         creaMensaje("curso creado correctamente", FacesMessage.SEVERITY_INFO);
         cursoAcademico="";
-        setListaCursoAcademico((ArrayList<Cursoacademico>)utilidadService.listaCursoAcademico());
+        setListaCursoAcademico(utilidadService.listaCursoAcademico());
       return null;
     }
       
@@ -216,7 +222,7 @@ public class BeanUtilidades implements Serializable{
             
     }
          cursoAcademico="";
-         setListaCursoAcademico((ArrayList<Cursoacademico>)utilidadService.listaCursoAcademico());
+         setListaCursoAcademico(utilidadService.listaCursoAcademico());
         creaMensaje("curso académico eliminado correctamente", FacesMessage.SEVERITY_INFO);
         return null;
     }

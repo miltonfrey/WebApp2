@@ -3,6 +3,7 @@ package controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -28,12 +29,12 @@ public class PaisController implements Serializable{
     }
      private String paisStr;
     private Pais pais;
-    private ArrayList<Pais> listaPaises;
+    private List<Pais> listaPaises;
     
      @PostConstruct
     public void init(){
         
-        setListaPaises((ArrayList<Pais>)universidadService.listaPaises());
+        setListaPaises(universidadService.listaPaises());
         
     }
 
@@ -53,13 +54,15 @@ public class PaisController implements Serializable{
         this.pais = pais;
     }
 
-    public ArrayList<Pais> getListaPaises() {
+    public List<Pais> getListaPaises() {
         return listaPaises;
     }
 
-    public void setListaPaises(ArrayList<Pais> listaPaises) {
+    public void setListaPaises(List<Pais> listaPaises) {
         this.listaPaises = listaPaises;
     }
+
+    
    
     
     
