@@ -45,8 +45,8 @@
             <p:growl id="msgs" />
                <p:dataTable id="tablaEquivalenciasAdmin"
                          emptyMessage="no hay equivalencias"
-                         selection="#{equivalenciasBean.selectedEquivalenciasSimples}"
-                         value="#{equivalenciasBean.listaAuxEquivalencias}"
+                         selection="#{equivalenciasController.selectedEquivalenciasSimples}"
+                         value="#{equivalenciasController.listaAuxEquivalencias}"
                          var="equivalencia"
                          
                          rowKey="#{equivalencia.idequivalencia}"

@@ -61,6 +61,10 @@ public class EquivalenciasPublicasController implements Serializable{
        
     }
 
+    public ArrayList<Equivalencia> getListaEquivalencias() {
+        return listaEquivalencias;
+    }
+
     
 
     public void setListaEquivalencias(ArrayList<Equivalencia> listaEquivalencias) {

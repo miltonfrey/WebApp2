@@ -14,8 +14,8 @@
       
         <h:form id="formPais">
              <p:growl id="msgs" />
-            <p:selectOneMenu value="#{equivalenciasPublicasBean.paisStr}" required="true" requiredMessage="hay que elegir un pais">
-                <p:ajax event="change" listener="#{equivalenciasPublicasBean.onChangePais()}" update=":formUniversidad :formPais:msgs :formTablaEquivalencias"/>
+            <p:selectOneMenu value="#{equivalenciasPublicasController.paisStr}" required="true" requiredMessage="hay que elegir un pais">
+                <p:ajax event="change" listener="#{equivalenciasPublicasController.onChangePais()}" update=":formUniversidad :formPais:msgs :formTablaEquivalencias"/>
                 <f:selectItem itemLabel="elige un país"  noSelectionOption="true"/>
                 <f:selectItems var="pais" value="#{paisBean.listaPaises}" itemValue="#{pais.nombre}" itemLabel="#{pais.nombre}"/>
             
@@ -24,32 +24,32 @@
         </h:form>
         <br/>
         <h:form id="formUniversidad">
-            <p:selectOneMenu value="#{equivalenciasPublicasBean.universidadStr}" required="true" requiredMessage="hay que elegir una universidad de destino" rendered="#{equivalenciasPublicasBean.checkPais}">
-                <p:ajax event="change" listener="#{equivalenciasPublicasBean.onChangeUni}" update=":formUniversidad :formPais :formTablaEquivalencias"/>
+            <p:selectOneMenu value="#{equivalenciasPublicasController.universidadStr}" required="true" requiredMessage="hay que elegir una universidad de destino" rendered="#{equivalenciasPublicasController.checkPais}">
+                <p:ajax event="change" listener="#{equivalenciasPublicasController.onChangeUni}" update=":formUniversidad :formPais :formTablaEquivalencias"/>
                 <f:selectItem itemLabel="elige una universidad" itemValue="#{null}" noSelectionOption="true"/>
-                <f:selectItems value="#{equivalenciasPublicasBean.listaUniversidad}" var="universidad" itemLabel="#{universidad.nombre}" itemValue="#{universidad.nombre}"/>
+                <f:selectItems value="#{equivalenciasPublicasController.listaUniversidad}" var="universidad" itemLabel="#{universidad.nombre}" itemValue="#{universidad.nombre}"/>
                 
             </p:selectOneMenu>
             <br/><br/>
-            <p:commandButton value="mostrar" action="#{equivalenciasPublicasBean.buscar()}" update=":formTablaEquivalencias :formPais" rendered="#{equivalenciasPublicasBean.checkUni}"/>
+            <p:commandButton value="mostrar" action="#{equivalenciasPublicasController.buscar()}" update=":formTablaEquivalencias :formPais" rendered="#{equivalenciasPublicasController.checkUni}"/>
             
         </h:form>
         
         <br/><br/><br/>
         
         <h:form id="formTablaEquivalencias">
-            <h:panelGrid columns="2" cellpadding="5" rendered="#{equivalenciasPublicasBean.checkUni}">
-                <p:outputLabel value="Web:" rendered="#{not empty equivalenciasPublicasBean.universidad.web and equivalenciasPublicasBean.mostrarInfo}"/>
-                <h:outputLink value="#{equivalenciasPublicasBean.universidad.web}" rendered="#{not empty equivalenciasPublicasBean.universidad.web and equivalenciasPublicasBean.mostrarInfo}">link</h:outputLink>
-                <p:outputLabel value="Info:" rendered="#{not empty equivalenciasPublicasBean.universidad.info and equivalenciasPublicasBean.mostrarInfo}"/>
-            <p:inputTextarea value="#{equivalenciasPublicasBean.universidad.info}" cols="60" rows="10" readonly="true" rendered="#{not empty equivalenciasPublicasBean.universidad.info and equivalenciasPublicasBean.mostrarInfo}"/>
+            <h:panelGrid columns="2" cellpadding="5" rendered="#{equivalenciasPublicasController.checkUni}">
+                <p:outputLabel value="Web:" rendered="#{not empty equivalenciasPublicasController.universidad.web and equivalenciasPublicasController.mostrarInfo}"/>
+                <h:outputLink value="#{equivalenciasPublicasController.universidad.web}" rendered="#{not empty equivalenciasPublicasController.universidad.web and equivalenciasPublicasController.mostrarInfo}">link</h:outputLink>
+                <p:outputLabel value="Info:" rendered="#{not empty equivalenciasPublicasController.universidad.info and equivalenciasPublicasController.mostrarInfo}"/>
+            <p:inputTextarea value="#{equivalenciasPublicasController.universidad.info}" cols="60" rows="10" readonly="true" rendered="#{not empty equivalenciasPublicasController.universidad.info and equivalenciasPublicasController.mostrarInfo}"/>
             </h:panelGrid>
                <p:dataTable id="tablaEquivalencias"
                          emptyMessage="no hay equivalencias publicas"
-                         value="#{equivalenciasPublicasBean.listaEquivalencias}"
+                         value="#{equivalenciasPublicasController.listaEquivalencias}"
                          var="equivalencia"
                          styleClass="tablaEquivalenciasPublicas"
-                         rowKey="#{equivalencia.idequivalencia}"
+                         rowKey=#{equivalencia.idequivalencia}
                          widgetVar="equivalenciaTable"
                          >
                    
@@ -57,7 +57,7 @@
                    
                    <p:column headerText="nombre" styleClass="asignaturaPublica">
                     <f:facet name="header">UDC</f:facet> 
-                    <ui:repeat value="#{equivalencia.grupoAsignaturaA.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                    <ui:repeat value="#{equivalencia.grupoAsignaturaA.miembroGrupoAsignaturaASet.toArray()}" var="asignatura">
                         <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
                         <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>
                         <br/>
@@ -65,7 +65,7 @@
                 </p:column>
                 
                    <p:column headerText="Cr" styleClass="creditosPublica">
-                    <ui:repeat value="#{equivalencia.grupoAsignaturaA.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                       <ui:repeat value="#{equivalencia.grupoAsignaturaA.miembroGrupoAsignaturaASet.toArray()}" var="asignatura">
                         
                         <h:outputText value="#{asignatura.asignatura.creditos}"/>
                         <br/>
@@ -73,7 +73,7 @@
                 </p:column>
                    
                     <p:column headerText="periodo" styleClass="periodoPublica">
-                    <ui:repeat value="#{equivalencia.grupoAsignaturaA.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        <ui:repeat value="#{equivalencia.grupoAsignaturaA.miembroGrupoAsignaturaASet.toArray()}" var="asignatura">
                         
                         <h:outputText value="#{asignatura.asignatura.periodo}"/>
                         <br/>
@@ -81,16 +81,16 @@
                 </p:column>
                    
                    
-                   <p:column headerText="#{equivalenciasPublicasBean.universidadStr}" styleClass="asignaturaPublica">
-                       <f:facet name="header">#{equivalenciasPublicasBean.universidadStr}</f:facet>
-                    <ui:repeat value="#{equivalencia.grupoAsignaturaB.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                   <p:column headerText="#{equivalenciasPublicasController.universidadStr}" styleClass="asignaturaPublica">
+                       <f:facet name="header">#{equivalenciasPublicasController.universidadStr}</f:facet>
+                       <ui:repeat value="#{equivalencia.grupoAsignaturaB.miembroGrupoAsignaturaBSet.toArray()}" var="asignatura">
                         <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{ not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
                          <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>
                          <br/>
                     </ui:repeat>
                 </p:column>
                        <p:column headerText="Cr" styleClass="creditosPublica">
-                    <ui:repeat value="#{equivalencia.grupoAsignaturaB.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                           <ui:repeat value="#{equivalencia.grupoAsignaturaB.miembroGrupoAsignaturaBSet.toArray()}" var="asignatura">
                         
                         <h:outputText value="#{asignatura.asignatura.creditos}"/>
                         <br/>
@@ -98,7 +98,7 @@
                 </p:column>
                    
                     <p:column headerText="periodo" styleClass="periodoPublica">
-                    <ui:repeat value="#{equivalencia.grupoAsignaturaB.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                        <ui:repeat value="#{equivalencia.grupoAsignaturaB.miembroGrupoAsignaturaBSet.toArray()}" var="asignatura">
                         
                         <h:outputText value="#{asignatura.asignatura.periodo}"/>
                         <br/>
