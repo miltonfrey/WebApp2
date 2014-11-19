@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -63,7 +64,7 @@ public class Movilidad implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "estado")
     private String estado;
-    @OneToMany(mappedBy = "idMovilidad", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "idMovilidad", fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     private Set<Contrato> contratoSet;
     @JoinColumn(name = "loginUsuario", referencedColumnName = "login")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

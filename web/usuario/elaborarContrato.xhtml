@@ -19,18 +19,18 @@
                 <p:outputPanel>
             
             <p:growl id="msgs"/> 
-            <p:dataTable id="tablaFic" value="#{misEquivalenciasBean.listaAsignaturasFic}" var="asigFic" rows="10"
+            <p:dataTable id="tablaFic" value="#{misEquivalenciasController.listaAsignaturasFic}" var="asigFic" rows="10"
                          emptyMessage="no hay asignaturas"
                          widgetVar="asigFicBtn"
-                         rowKey="#{asigFic.id}"
-                         selection="#{misEquivalenciasBean.selectedAsignaturasFic}"               
+                         rowKey="#{asigFic.asignaturaPK}"
+                         selection="#{misEquivalenciasController.selectedAsignaturasFic}"               
                          paginator="true"
                          styleClass="tablaFic"
-                         filteredValue="#{misEquivalenciasBean.filteredAsignaturasFic}"
+                         filteredValue="#{misEquivalenciasController.filteredAsignaturasFic}"
                          >
-               <!-- <p:ajax event="rowSelectCheckbox" listener="{misEquivalenciasBean.seleccionaFila}" update=":formEquivalenciaFic"/>
-                <p:ajax event="rowUnselectCheckbox" listener="{misEquivalenciasBean.deseleccionarFila}" update=":formEquivalenciaFic"/>    
-                <p:ajax event="toggleSelect" listener="{misEquivalenciasBean.unToggle}" update=":formEquivalenciaFic"/>-->
+               <!-- <p:ajax event="rowSelectCheckbox" listener="{misEquivalenciasController.seleccionaFila}" update=":formEquivalenciaFic"/>
+                <p:ajax event="rowUnselectCheckbox" listener="{misEquivalenciasController.deseleccionarFila}" update=":formEquivalenciaFic"/>    
+                <p:ajax event="toggleSelect" listener="{misEquivalenciasController.unToggle}" update=":formEquivalenciaFic"/>-->
                 
                
                
@@ -56,9 +56,9 @@
                 
                 <p:column styleClass="info" headerText="+info">
                         
-                        <p:commandLink value="+info" action="#{misEquivalenciasBean.detallesAsign}" update=":formEquivalenciaFic" rendered="#{not empty asigFic.infoAsigantura}">
+                        <p:commandLink value="+info" action="#{misEquivalenciasController.detallesAsign}" update=":formEquivalenciaFic" rendered="#{not empty asigFic.infoAsigantura}">
                         
-                            <f:setPropertyActionListener value="#{asigFic}" target="#{misEquivalenciasBean.selectedAsignatura}"/>
+                            <f:setPropertyActionListener value="#{asigFic}" target="#{misEquivalenciasController.selectedAsignatura}"/>
                             
                         </p:commandLink>
                         
@@ -70,10 +70,10 @@
             </p:dataTable>
        
             
-            <p:inputTextarea id="info" readonly="true" cols="33" rows="4"  styleClass="areaTexto" value="#{misEquivalenciasBean.selectedAsignatura.infoAsigantura}"
-                             rendered="#{misEquivalenciasBean.verInfo}"/>
-            <p:commandButton styleClass="cerrarAreaTexto" value="cerrar" action="#{misEquivalenciasBean.cerrarDetallesAsign}" update=":formEquivalenciaFic"
-                             rendered="#{misEquivalenciasBean.verInfo}"/> 
+            <p:inputTextarea id="info" readonly="true" cols="33" rows="4"  styleClass="areaTexto" value="#{misEquivalenciasController.selectedAsignatura.infoAsigantura}"
+                             rendered="#{misEquivalenciasController.verInfo}"/>
+            <p:commandButton styleClass="cerrarAreaTexto" value="cerrar" action="#{misEquivalenciasController.cerrarDetallesAsign}" update=":formEquivalenciaFic"
+                             rendered="#{misEquivalenciasController.verInfo}"/> 
        
        </p:outputPanel>
            
@@ -84,18 +84,18 @@
             
             <p:dataTable id="tablaUniversidad"
                          emptyMessage="no hay asignaturas"
-                         value="#{misEquivalenciasBean.listaAsignaturasUniversidad}"
+                         value="#{misEquivalenciasController.listaAsignaturasUniversidad}"
                          var="asigUni"
                          widgetVar="asigUniBtn"
-                         selection="#{misEquivalenciasBean.selectedAsignaturasUni}"
-                         filteredValue="#{misEquivalenciasBean.filteredAsignaturasUni}"
-                         rowKey="#{asigUni.id}"
+                         selection="#{misEquivalenciasController.selectedAsignaturasUni}"
+                         filteredValue="#{misEquivalenciasController.filteredAsignaturasUni}"
+                         rowKey="#{asigUni.asignaturaPK}"
                          paginator="true"
                          rows="10"
                          styleClass="tablaUniversidad"
                          >
                 
-                <f:facet name="header">DESTINO: #{misEquivalenciasBean.selectedMovilidad.universidad.nombre}</f:facet>
+                <f:facet name="header">DESTINO: #{misEquivalenciasController.selectedMovilidad.nombreUniversidad.nombre}</f:facet>
                 
                 <p:column headerText="asignatura" sortBy="#{asigUni.nombreAsignatura}" styleClass="asignatura" filterBy="#{asigUni.nombreAsignatura}">
                    <h:outputLink target="_blank" value="#{asigUni.webAsignatura}" rendered="#{not empty asigUni.webAsignatura}">#{asigUni.nombreAsignatura}</h:outputLink>
@@ -117,9 +117,9 @@
                
                 <p:column headerText="+info" styleClass="info">
                         
-                     <p:commandLink value="+info" action="#{misEquivalenciasBean.detallesAsign}" update=":formEquivalenciaFic:info" rendered="#{not empty asigUni.infoAsigantura}">
+                     <p:commandLink value="+info" action="#{misEquivalenciasController.detallesAsign}" update=":formEquivalenciaFic:info" rendered="#{not empty asigUni.infoAsigantura}">
                         
-                            <f:setPropertyActionListener value="#{asigUni}" target="#{misEquivalenciasBean.selectedAsignatura}"/>
+                            <f:setPropertyActionListener value="#{asigUni}" target="#{misEquivalenciasController.selectedAsignatura}"/>
                             
                         </p:commandLink>
                         
@@ -130,9 +130,9 @@
             </p:dataTable>
                          
         </p:outputPanel>             
-            <p:commandButton styleClass="añadir" id="addBtn" process=":formEquivalenciaFic:" update=":formEquivalenciaFic:  :formTablaEquivalencias " value="Añadir" action="#{misEquivalenciasBean.asignaturasTotales}"  
+            <p:commandButton styleClass="añadir" id="addBtn" process=":formEquivalenciaFic:" update=":formEquivalenciaFic:  :formTablaEquivalencias " value="Añadir" action="#{misEquivalenciasController.asignaturasTotales}"  
                                                 oncomplete="PF('asigUniBtn').unselectAllRows();PF('asigUniBtn').filter();PF('asigFicBtn').unselectAllRows();PF('asigFicBtn').filter();PF('equivalenciaTable').unselectAllRows();"
-                                                rendered="#{misEquivalenciasBean.verConfirmar}"/> 
+                                                rendered="#{misEquivalenciasController.verConfirmar}"/> 
                          
         
              </h:form>
@@ -146,8 +146,8 @@
             
             <p:dataTable id="tablaEquivalencias"
                          emptyMessage="no hay equivalencias"
-                         selection="#{misEquivalenciasBean.selectedEquivalencias}"
-                         value="#{misEquivalenciasBean.listaAuxEquivalencias}"
+                         selection="#{misEquivalenciasController.selectedEquivalencias}"
+                         value="#{misEquivalenciasController.listaAuxEquivalencias}"
                          var="equivalencia"
                          styleClass="tablaEquivalencias"
                          rowKey="#{equivalencia.idequivalencia}"
@@ -158,21 +158,21 @@
                 
                 
                 <p:column headerText="UDC" styleClass="nuevoAsignatura">
-                    <ui:repeat value="#{equivalencia.grupoAsignaturaA.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                    <ui:repeat value="#{equivalencia.grupoAsignaturaA.miembroGrupoAsignaturaASet.toArray()}" var="asignatura">
                         <h:outputText value="#{asignatura.asignatura.nombreAsignatura}"/>
                         <br/>
                     </ui:repeat>
                 </p:column>
                 
                 <p:column headerText="Cr" styleClass="nuevoCreditos">
-                    <ui:repeat value="#{equivalencia.grupoAsignaturaA.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                    <ui:repeat value="#{equivalencia.grupoAsignaturaA.miembroGrupoAsignaturaASet.toArray()}" var="asignatura">
                         <h:outputText value="#{asignatura.asignatura.creditos}"/>
                         <br/>
                     </ui:repeat>
                 </p:column>
                 
-                <p:column headerText="#{misEquivalenciasBean.selectedMovilidad.universidad.nombre}" styleClass="nuevoAsignatura">
-                    <ui:repeat value="#{equivalencia.grupoAsignaturaB.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                <p:column headerText="#{misEquivalenciasController.selectedMovilidad.nombreUniversidad.nombre}" styleClass="nuevoAsignatura">
+                    <ui:repeat value="#{equivalencia.grupoAsignaturaB.miembroGrupoAsignaturaBSet.toArray()}" var="asignatura">
                         <h:outputText value="#{asignatura.asignatura.nombreAsignatura} "/>
                         
                         <br/>
@@ -181,34 +181,34 @@
                 </p:column>
                 
                 <p:column headerText="Cr" styleClass="nuevoCreditos">
-                    <ui:repeat value="#{equivalencia.grupoAsignaturaB.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                    <ui:repeat value="#{equivalencia.grupoAsignaturaB.miembroGrupoAsignaturaBSet.toArray()}" var="asignatura">
                         <h:outputText value="#{asignatura.asignatura.creditos} "/>
                         
                         <br/>
                     </ui:repeat>
                    
                 </p:column>
-                 <p:column selectionMode="multiple" styleClass="nuevoMultiple" rendered="#{misEquivalenciasBean.verConfirmar}"/>
+                 <p:column selectionMode="multiple" styleClass="nuevoMultiple" rendered="#{misEquivalenciasController.verConfirmar}"/>
                  
                  
          <p:columnGroup type="footer">
             <p:row>
                 <p:column footerText="total créditos: "  styleClass="asignatura"/>
-                <p:column footerText="#{misEquivalenciasBean.creditosA}" styleClass="creditos"/>
+                <p:column footerText="#{misEquivalenciasController.creditosA}" styleClass="creditos"/>
                 
                 <p:column footerText="total créditos: "  styleClass="asignatura"/>
-                <p:column footerText="#{misEquivalenciasBean.creditosB}" styleClass="creditos"/>
+                <p:column footerText="#{misEquivalenciasController.creditosB}" styleClass="creditos"/>
                 <p:column  styleClass="multiple"/>
             </p:row>
             
                 </p:columnGroup>
                
                
-                <f:facet name="footer" rendered="#{misEquivalenciasBean.verConfirmar}">
-                             <p:commandButton id="deleteBtn"  process=":formTablaEquivalencias:" update=":formTablaEquivalencias: :formEquivalenciaFic:msgs"  icon="ui-icon-search" value="Borrar" action="#{misEquivalenciasBean.eliminaEquivalenciasLista}"
-                                              oncomplete="PF('equivalenciaTable').unselectAllRows();" rendered="#{misEquivalenciasBean.verConfirmar}"/>
-                             <p:commandButton id="confirmBtn" value="confirmar contrato" process=":formTablaEquivalencias" action="#{misEquivalenciasBean.confirmarContrato}" update=":formEquivalenciaFic: :formTablaEquivalencias:tablaEquivalencias:" oncomplete="PF('equivalenciaTable').unselectAllRows();"
-                                              rendered="#{misEquivalenciasBean.verConfirmar}"/>
+                <f:facet name="footer" rendered="#{misEquivalenciasController.verConfirmar}">
+                             <p:commandButton id="deleteBtn"  process=":formTablaEquivalencias:" update=":formTablaEquivalencias: :formEquivalenciaFic:msgs"  icon="ui-icon-search" value="Borrar" action="#{misEquivalenciasController.eliminaEquivalenciasLista}"
+                                              oncomplete="PF('equivalenciaTable').unselectAllRows();" rendered="#{misEquivalenciasController.verConfirmar}"/>
+                             <p:commandButton id="confirmBtn" value="confirmar contrato" process=":formTablaEquivalencias" action="#{misEquivalenciasController.confirmarContrato}" update=":formEquivalenciaFic: :formTablaEquivalencias:tablaEquivalencias:" oncomplete="PF('equivalenciaTable').unselectAllRows();"
+                                              rendered="#{misEquivalenciasController.verConfirmar}"/>
                                
                          </f:facet>
            

@@ -21,16 +21,16 @@
             
             <p:dataTable id="tablaEquivalencias"
                          emptyMessage="no hay equivalencias"
-                         selection="#{misEquivalenciasBean.selectedEquivalencias}"
-                         value="#{misEquivalenciasBean.listaAuxEquivalencias}"
+                         selection="#{misEquivalenciasController.selectedEquivalencias}"
+                         value="#{misEquivalenciasController.listaAuxEquivalencias}"
                          var="equivalencia"
                          styleClass="verTablaEquivalencias"
                          rowKey="#{equivalencia.idequivalencia}"
                          widgetVar="equivalenciaTable">
                          
                 <f:facet name="header">Estado del contrato:
-                    <h:outputText value=" #{misEquivalenciasBean.selectedContrato.estado}"/><br/>última modificación
-                    <h:outputText value="#{misEquivalenciasBean.selectedContrato.fecha}">
+                    <h:outputText value=" #{misEquivalenciasController.selectedContrato.estado}"/><br/>última modificación
+                    <h:outputText value="#{misEquivalenciasController.selectedContrato.fecha}">
                         <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
                     </h:outputText>
                            
@@ -39,7 +39,7 @@
                 
                 
                 <p:column headerText="UDC" styleClass="verAsignatura">
-                    <ui:repeat value="#{equivalencia.grupoAsignaturaA.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                    <ui:repeat value="#{equivalencia.grupoAsignaturaA.miembroGrupoAsignaturaASet.toArray()}" var="asignatura">
                         <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{ not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
                          <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>
                          <br/>
@@ -47,21 +47,21 @@
                 </p:column>
                 
                 <p:column headerText="Cr" styleClass="verCreditos">
-                    <ui:repeat value="#{equivalencia.grupoAsignaturaA.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                    <ui:repeat value="#{equivalencia.grupoAsignaturaA.miembroGrupoAsignaturaASet.toArray()}" var="asignatura">
                         <h:outputText value="#{asignatura.asignatura.creditos}"/>
                         <br/>
                     </ui:repeat>
                 </p:column>
                 
                 <p:column headerText="Periodo" styleClass="verPeriodo">
-                    <ui:repeat value="#{equivalencia.grupoAsignaturaA.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                    <ui:repeat value="#{equivalencia.grupoAsignaturaA.miembroGrupoAsignaturaASet.toArray()}" var="asignatura">
                         <h:outputText value="#{asignatura.asignatura.periodo}"/>
                         <br/>
                     </ui:repeat>
                 </p:column>
                 
-                <p:column headerText="#{misEquivalenciasBean.selectedMovilidad.universidad.nombre}" styleClass="verAsignatura">
-                    <ui:repeat value="#{equivalencia.grupoAsignaturaB.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                <p:column headerText="#{misEquivalenciasController.selectedMovilidad.nombreUniversidad.nombre}" styleClass="verAsignatura">
+                    <ui:repeat value="#{equivalencia.grupoAsignaturaB.miembroGrupoAsignaturaBSet.toArray()}" var="asignatura">
                        <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{ not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
                          <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>
                          <br/>
@@ -70,7 +70,7 @@
                 </p:column>
                 
                 <p:column headerText="Cr" styleClass="verCreditos">
-                    <ui:repeat value="#{equivalencia.grupoAsignaturaB.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                    <ui:repeat value="#{equivalencia.grupoAsignaturaB.miembroGrupoAsignaturaBSet.toArray()}" var="asignatura">
                         <h:outputText value="#{asignatura.asignatura.creditos} "/>
                         
                         <br/>
@@ -79,7 +79,7 @@
                 </p:column>
                 
                 <p:column headerText="Periodo" styleClass="verPeriodo">
-                    <ui:repeat value="#{equivalencia.grupoAsignaturaB.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                    <ui:repeat value="#{equivalencia.grupoAsignaturaB.miembroGrupoAsignaturaBSet.toArray()}" var="asignatura">
                         <h:outputText value="#{asignatura.asignatura.periodo} "/>
                         
                         <br/>
@@ -92,10 +92,10 @@
          <p:columnGroup type="footer">
             <p:row>
                 <p:column footerText="total créditos: "  styleClass="verAsignatura"/>
-                <p:column footerText="#{misEquivalenciasBean.creditosA}" styleClass="creditos"/>
+                <p:column footerText="#{misEquivalenciasController.creditosA}" styleClass="creditos"/>
                 <p:column/>
                 <p:column footerText="total créditos: "  styleClass="verAsignatura"/>
-                <p:column footerText="#{misEquivalenciasBean.creditosB}" styleClass="creditos"/>
+                <p:column footerText="#{misEquivalenciasController.creditosB}" styleClass="creditos"/>
                 <p:column />
             </p:row>
             
@@ -104,7 +104,7 @@
             </p:dataTable>
             
            <br/>
-           <p:commandLink value="crear contrato nuevo a partir de este" action="#{misEquivalenciasBean.nuevoAceptado}" rendered="#{misEquivalenciasBean.ultimo}" ajax="false"/>
+           <p:commandLink value="crear contrato nuevo a partir de este" action="#{misEquivalenciasController.nuevoAceptado}" rendered="#{misEquivalenciasController.ultimo}" ajax="false"/>
             
         </h:form>
 

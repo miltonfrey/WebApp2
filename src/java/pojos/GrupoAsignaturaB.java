@@ -8,6 +8,7 @@ package pojos;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,7 +41,7 @@ public class GrupoAsignaturaB implements Serializable {
     @Basic(optional = false)
     @Column(name = "idequivalencia")
     private Integer idequivalencia;
-    @OneToMany(mappedBy = "idGrupoAsignaturaB", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "idGrupoAsignaturaB",cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Set<MiembroGrupoAsignaturaB> miembroGrupoAsignaturaBSet;
     @JoinColumn(name = "idequivalencia", referencedColumnName = "idequivalencia", insertable = false, updatable = false)
     @OneToOne(optional = false, fetch = FetchType.LAZY)

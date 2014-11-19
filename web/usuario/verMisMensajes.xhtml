@@ -13,18 +13,18 @@
          <h:form id="recibidos">
            <p:growl id="msgsRecibidos" />
             
-           <p:dataTable id="t1" var="mensaje" value="#{mensajesRecibidosUserBean.listaMensajesRecibidos}" rows="10"
+           <p:dataTable id="t1" var="mensaje" value="#{mensajesRecibidosUserController.listaMensajesRecibidos}" rows="10"
                          emptyMessage="no hay mensajes"
                          widgetVar="mensTabla"
-                         filteredValue="#{mensajesRecibidosUserBean.filteredMensajesRecibidos}"
-                         selection="#{mensajesRecibidosUserBean.selectedMensajesRecibidos}"
+                         filteredValue="#{mensajesRecibidosUserController.filteredMensajesRecibidos}"
+                         selection="#{mensajesRecibidosUserController.selectedMensajesRecibidos}"
                          rowKey="#{mensaje.idmensaje}"
                          paginator="true"
                          >
                <f:facet name="header">Mensajes recibidos</f:facet>
                 
                       <p:column headerText="De:">
-                         <h:outputText value="#{mensaje.usuarioByOrigen.login}"/>
+                          <h:outputText value="#{mensaje.origen.login}"/>
                       </p:column>
                     
                       <p:column headerText="asunto">
@@ -49,15 +49,15 @@
                    <h:outputText value="#{mensaje.leidoDestino}" />
                </p:column>
                <p:column styleClass="leerEnviados" headerText="Leer">
-                        <p:commandButton value="leer" update=":recibidos :panelRecibidos" action="#{mensajesRecibidosUserBean.leerMensajeRecibido}">
-                            <f:setPropertyActionListener value="#{mensaje}" target="#{mensajesRecibidosUserBean.selectedMensajeRecibido}"/>
+                        <p:commandButton value="leer" update=":recibidos :panelRecibidos" action="#{mensajesRecibidosUserController.leerMensajeRecibido}">
+                            <f:setPropertyActionListener value="#{mensaje}" target="#{mensajesRecibidosUserController.selectedMensajeRecibido}"/>
                            </p:commandButton>
                       </p:column>
                
                <p:column selectionMode="multiple" styleClass="multipleEnviados"/>
                
                          <f:facet name="footer">
-                             <p:commandButton update=":recibidos :panelRecibidos" icon="ui-icon-search" value="Borrar" action="#{mensajesRecibidosUserBean.eliminarMensajesRecibidos}"
+                             <p:commandButton update=":recibidos :panelRecibidos" icon="ui-icon-search" value="Borrar" action="#{mensajesRecibidosUserController.eliminarMensajesRecibidos}"
                                               oncomplete="PF('mensTabla').clearFilters()"/>
                          </f:facet>
                
@@ -66,14 +66,14 @@
          </h:form>
         <br/>
            <h:form id="panelRecibidos">
-               <h:panelGrid  columns="2" cellpadding="5" rendered="#{mensajesRecibidosUserBean.activaRecibido}">
+               <h:panelGrid  columns="2" cellpadding="5" rendered="#{mensajesRecibidosUserController.activaRecibido}">
                 <p:outputLabel id="labelTemaRecibido" value="asunto:" />
-                <p:inputText id="temaRecibido" value="#{mensajesRecibidosUserBean.temaRecibido}" readonly="true"/>
+                <p:inputText id="temaRecibido" value="#{mensajesRecibidosUserController.temaRecibido}" readonly="true"/>
                 <p:outputLabel id="labelTextoRecibido" for="textoRecibido" />
-                <p:inputTextarea id="textoRecibido" value="#{mensajesRecibidosUserBean.textAreaRecibido}"
+                <p:inputTextarea id="textoRecibido" value="#{mensajesRecibidosUserController.textAreaRecibido}"
                                   readonly="true" autoResize="true" cols="80" rows="10"/>
                 
-                <p:commandButton value="cerrar" process="@this" action="#{mensajesRecibidosUserBean.cerrarMensajeRecibido}" update=":panelRecibidos" />
+                <p:commandButton value="cerrar" process="@this" action="#{mensajesRecibidosUserController.cerrarMensajeRecibido}" update=":panelRecibidos" />
            </h:panelGrid>
     
            
@@ -83,10 +83,10 @@
             
             <h:form id="enviados">
             <p:growl id="msgsEnviados" />
-            <p:dataTable id="t2" var="mensaje" value="#{mensajesEnviadosUserBean.listaMensajesEnviados}" rowKey="#{mensaje.idmensaje}" rows="10"
+            <p:dataTable id="t2" var="mensaje" value="#{mensajesEnviadosUserController.listaMensajesEnviados}" rowKey="#{mensaje.idmensaje}" rows="10"
                          emptyMessage="no hay mensajes"
                          style="margin-bottom:0"
-                         selection="#{mensajesEnviadosUserBean.selectedMensajesEnviados}"
+                         selection="#{mensajesEnviadosUserController.selectedMensajesEnviados}"
                          paginator="true"
                          >
                  
@@ -103,15 +103,15 @@
                               </p:column>
                         
                          <p:column headerText="leer" styleClass="leerEnviados">
-                             <p:commandButton value="leer" update=":enviados :panelEnviados" action="#{mensajesEnviadosUserBean.leerMensajeEnviado}" styleClass="leerEnviados">
-                                      <f:setPropertyActionListener value="#{mensaje}" target="#{mensajesEnviadosUserBean.selectedMensajeEnviado}"/>
+                             <p:commandButton value="leer" update=":enviados :panelEnviados" action="#{mensajesEnviadosUserController.leerMensajeEnviado}" styleClass="leerEnviados">
+                                      <f:setPropertyActionListener value="#{mensaje}" target="#{mensajesEnviadosUserController.selectedMensajeEnviado}"/>
                                   </p:commandButton>
                               </p:column>
                          
                          <p:column selectionMode="multiple" style="multiple" styleClass="multipleEnviados"/>
                              
                          <f:facet name="footer">
-                             <p:commandButton update=":enviados :panelEnviados" icon="ui-icon-search" value="Borrar" action="#{mensajesEnviadosUserBean.eliminarMensajesEnviados}" />
+                             <p:commandButton update=":enviados :panelEnviados" icon="ui-icon-search" value="Borrar" action="#{mensajesEnviadosUserController.eliminarMensajesEnviados}" />
                          </f:facet>
                          
                         </p:dataTable>   
@@ -123,15 +123,15 @@
             
           <br/>    
           <h:form id="panelEnviados">
-              <h:panelGrid columns="2" cellpadding="5" rendered="#{mensajesEnviadosUserBean.activaEnviado}">
+              <h:panelGrid columns="2" cellpadding="5" rendered="#{mensajesEnviadosUserController.activaEnviado}">
                 
                 <p:outputLabel id="labelTemaEnviado" value="asunto:" />
-                <p:inputText id="temaEnviado" value="#{mensajesEnviadosUserBean.temaEnviado}" readonly="true" />
+                <p:inputText id="temaEnviado" value="#{mensajesEnviadosUserController.temaEnviado}" readonly="true" />
                 <p:outputLabel id="labelTextoEnviado" for="textoEnviado" />
-                <p:inputTextarea id="textoEnviado" value="#{mensajesEnviadosUserBean.textAreaEnviado}"
+                <p:inputTextarea id="textoEnviado" value="#{mensajesEnviadosUserController.textAreaEnviado}"
                                   readonly="true" autoResize="true" cols="80" rows="10"/>
                 
-                <p:commandButton value="cerrar" process="@this" action="#{mensajesEnviadosUserBean.cerrarMensajeEnviado}" update=":panelEnviados" />
+                <p:commandButton value="cerrar" process="@this" action="#{mensajesEnviadosUserController.cerrarMensajeEnviado}" update=":panelEnviados" />
         </h:panelGrid>
                     
             </h:form>        

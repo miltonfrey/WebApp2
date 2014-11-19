@@ -19,46 +19,46 @@
                 <h:panelGrid columns="2" cellpadding="5">
                 
                 <p:outputLabel value="Nombre:"/>
-                <p:inputText value="#{crearUsuarioBean.nombre}"
+                <p:inputText value="#{crearUsuarioController.nombre}"
                              required="true"
                              requiredMessage="el campo nombre está vacío"/>
                 <p:outputLabel value="Primer apellido"/>
-                <p:inputText value="#{crearUsuarioBean.apellido1}"
+                <p:inputText value="#{crearUsuarioController.apellido1}"
                              required="true"
                              requiredMessage="el campo apellido1 está vacío"/>
                 
                 
                 <p:outputLabel value="Segundo apellido"/>
-                <p:inputText id="ii1" value="#{crearUsuarioBean.apellido2}"/>
+                <p:inputText id="ii1" value="#{crearUsuarioController.apellido2}"/>
                              
                
                 <p:outputLabel value="Login"/>
-                <p:inputText value="#{crearUsuarioBean.login}"
+                <p:inputText value="#{crearUsuarioController.login}"
                              required="true"
                              requiredMessage="el campo login está vacío"
                              autocomplete="off"/>
                 
                 <p:outputLabel value="Contraseña"/>
-                <p:password id="hidden1" value="#{crearUsuarioBean.password}"
+                <p:password id="hidden1" value="#{crearUsuarioController.password}"
                 required="true"
                 requiredMessage="password no puede estar vacio"
                 autocomplete="off"/>
                 
                 <p:outputLabel value="repite contraseña"/>
-                <p:password value="#{crearUsuarioBean.passwordAux}"
+                <p:password value="#{crearUsuarioController.passwordAux}"
                             required="true"
                             requiredMessage="el campo password está vacío"/>
               
                 <p:outputLabel value="titulacion"/>
-                <p:selectOneMenu id="select1" value="#{crearUsuarioBean.titulacion}" 
+                <p:selectOneMenu id="select1" value="#{crearUsuarioController.titulacion}" 
                                  required="true"  
                                  requiredMessage="hay que intrododucir una titulacion">
                 
                     <f:selectItem itemLabel="elige una titulacion" noSelectionOption="true"/>
-                    <f:selectItems value="#{crearUsuarioBean.listaTitulaciones}"/>
+                    <f:selectItems value="#{crearUsuarioController.listaTitulaciones}"/>
                 </p:selectOneMenu>
                
-                <p:commandButton value="crear usuario" action="#{crearUsuarioBean.creaUsuario}" update=":form1:" />
+                <p:commandButton value="crear usuario" action="#{crearUsuarioController.creaUsuario}" update=":form1:" />
                 
                 </h:panelGrid>
                 
