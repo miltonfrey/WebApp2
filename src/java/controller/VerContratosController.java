@@ -142,8 +142,11 @@ public class VerContratosController implements Serializable{
             listaCopia=new ArrayList<>(c.getEquivalenciaSet());
             
             c.setEquivalenciaSet(null);
+            try{
             equivalenciaService.eliminaContrato(c);
-            
+            }catch(ContratoNotFoundException ex){
+                
+            }
           
            }
         for(Equivalencia e:listaCopia){

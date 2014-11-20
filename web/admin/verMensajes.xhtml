@@ -159,7 +159,7 @@
                 <p:inputTextarea id="textoEnviado" value="#{mensajesEnviadosAdminController.textAreaEnviado}"
                                   readonly="true" autoResize="true" cols="80" rows="10"/>
                 
-                <p:commandButton  widgetVar="b" id="cancelBtn" value="cerrar" process="@this" action="#{mensajesEnviadosAdminController.cerrarMensajeEnviado}" />
+                <p:commandButton value="cerrar" process="@this" action="#{mensajesEnviadosAdminController.cerrarMensajeEnviado}"   update=":panelEnviados" />
                 </h:panelGrid>
                     
             </h:form>        

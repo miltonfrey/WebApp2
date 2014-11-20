@@ -22,17 +22,12 @@
             <p:dataTable id="tablaFic" value="#{misEquivalenciasController.listaAsignaturasFic}" var="asigFic" rows="10"
                          emptyMessage="no hay asignaturas"
                          widgetVar="asigFicBtn"
-                         rowKey="#{asigFic.asignaturaPK}"
+                         rowKey="#{asigFic.asignaturaPK.codAsignatura}"
                          selection="#{misEquivalenciasController.selectedAsignaturasFic}"               
                          paginator="true"
                          styleClass="tablaFic"
                          filteredValue="#{misEquivalenciasController.filteredAsignaturasFic}"
                          >
-               <!-- <p:ajax event="rowSelectCheckbox" listener="{misEquivalenciasController.seleccionaFila}" update=":formEquivalenciaFic"/>
-                <p:ajax event="rowUnselectCheckbox" listener="{misEquivalenciasController.deseleccionarFila}" update=":formEquivalenciaFic"/>    
-                <p:ajax event="toggleSelect" listener="{misEquivalenciasController.unToggle}" update=":formEquivalenciaFic"/>-->
-                
-               
                
                 <f:facet name="header">ORIGEN: UDC</f:facet>
                 <p:column headerText="asignatura"  sortBy="#{asigFic.nombreAsignatura}" styleClass="asignatura" filterBy="#{asigFic.nombreAsignatura}">
@@ -89,7 +84,7 @@
                          widgetVar="asigUniBtn"
                          selection="#{misEquivalenciasController.selectedAsignaturasUni}"
                          filteredValue="#{misEquivalenciasController.filteredAsignaturasUni}"
-                         rowKey="#{asigUni.asignaturaPK}"
+                         rowKey="#{asigUni.asignaturaPK.codAsignatura}"
                          paginator="true"
                          rows="10"
                          styleClass="tablaUniversidad"

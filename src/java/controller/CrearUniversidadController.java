@@ -1,6 +1,7 @@
 
 package controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -10,6 +11,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import model.UniversidadService;
 import pojos.Exceptions.PaisException;
+import pojos.Exceptions.UniversidadException;
 import pojos.Pais;
 import pojos.Universidad;
 import pojos.utillidades.BeanUtilidades;
@@ -17,7 +19,7 @@ import pojos.utillidades.BeanUtilidades;
 
 @Named(value = "crearUniversidadController")
 @ViewScoped
-public class CrearUniversidadController {
+public class CrearUniversidadController implements Serializable{
     @EJB
     private UniversidadService universidadService;
     @Inject
@@ -215,11 +217,11 @@ public class CrearUniversidadController {
             
             universidadService.insertarUniversidad(u);
             
-        }catch(NullPointerException ex){
+        }catch(RuntimeException ex){
             beanUtilidades.creaMensaje("ya existe esa universidad", FacesMessage.SEVERITY_ERROR);
-            return "crearUniversidad.xhtml";
+            return null;
         }
-        catch(RuntimeException ex){
+        catch(Exception ex){
             beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_INFO);
             return "crearUniversidad.xhtml";
         }
@@ -256,7 +258,7 @@ public class CrearUniversidadController {
                
                 try{
                     universidadService.delete(u);
-                }catch(RuntimeException ex){
+                }catch(UniversidadException|RuntimeException ex){
                     listaUniversidades=universidadService.listarPorPais(paisStr);
                    beanUtilidades.creaMensaje("Error eliminando", FacesMessage.SEVERITY_INFO); 
                    

@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import pojos.Cursoacademico;
 import pojos.Exceptions.DuracionException;
 import pojos.Exceptions.NumeroDeMovilidadesException;

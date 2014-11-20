@@ -156,7 +156,9 @@ public class MensajesRecibidosAdminController implements Serializable{
         activaRecibido=true;
         temaRecibido=selectedMensajeRecibido.getTema();
         textAreaRecibido=selectedMensajeRecibido.getTexto();
+        selectedMensajeRecibido.setLeidoDestino("si");
         mensajeService.leerMensajeRecibido(selectedMensajeRecibido);
+        //actualizarRecibidos();
          return null;
      }
      

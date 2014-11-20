@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -341,12 +343,17 @@ public class MisEquivalenciasController implements Serializable{
        
           equivalencia=new Equivalencia();
          GrupoAsignaturaA grupoA=new GrupoAsignaturaA();
+         //grupoA.setMiembroGrupoAsignaturaASet(null);
          GrupoAsignaturaB grupoB=new GrupoAsignaturaB();
+         //grupoB.setMiembroGrupoAsignaturaBSet(null);
           MiembroGrupoAsignaturaA ma;
           MiembroGrupoAsignaturaB mb;
         
+          
+         
         DataTable dataTable=(DataTable)FacesContext.getCurrentInstance().getViewRoot().findComponent("formEquivalenciaFic:tablaFic");
         DataTable dataTable2=(DataTable)FacesContext.getCurrentInstance().getViewRoot().findComponent("formEquivalenciaFic:tablaUniversidad");
+        
         
         
         selectedAsignaturasFic=(ArrayList < Asignatura >)dataTable.getSelection();
@@ -369,8 +376,10 @@ public class MisEquivalenciasController implements Serializable{
        
         ma=new MiembroGrupoAsignaturaA();
         ma.setAsignatura(a);
+        Set s1=new HashSet();
+        s1.add(ma);
         ma.setIdGrupoAsignaturaA(grupoA);
-        grupoA.getMiembroGrupoAsignaturaASet().add(ma);
+       grupoA.setMiembroGrupoAsignaturaASet(s1);
         
                   creditosA=creditosA+a.getCreditos();                              // con cascade save-update no hace falta salvar el miembro_grupo_asignaturas
         
@@ -464,7 +473,7 @@ public class MisEquivalenciasController implements Serializable{
         ArrayList<Equivalencia>listaCopia=null;
          try{
         listaCopia=equivalenciaService.editarContrato(listaAuxEquivalencias, c);
-        }catch(RuntimeException ex){
+        }catch(ContratoNotFoundException ex){
          
              try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/usuario/verMisMovilidades.xhtml");
@@ -521,7 +530,7 @@ public class MisEquivalenciasController implements Serializable{
         
          try{
          equivalenciaService.crearContratoDesdeAceptado(listaAuxEquivalencias, c, cNuevo);
-        }catch(RuntimeException ex){
+        }catch(Exception ex){
          
              try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/usuario/verMisMovilidades.xhtml");

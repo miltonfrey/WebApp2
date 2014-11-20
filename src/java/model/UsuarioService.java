@@ -14,7 +14,7 @@ import pojos.Usuario;
 @Local
 public interface UsuarioService {    
     public Usuario find(String nombre)throws UsuarioNotFoundException;
-    public void delete(Usuario u);
+    public void delete(Usuario u) throws UsuarioNotFoundException;
     public List<Usuario> listar();
     
     public void insertarUsuario(Usuario u);

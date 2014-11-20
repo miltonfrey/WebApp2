@@ -12,6 +12,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import model.UsuarioService;
+import pojos.Exceptions.UsuarioNotFoundException;
 import pojos.Usuario;
 import pojos.utillidades.BeanUtilidades;
 
@@ -78,7 +79,15 @@ public class EliminarUsuarioController implements Serializable{
         }
         
         for(Usuario u:selectedUsuarios){
-        usuarioService.delete(u);
+            try{
+                
+                usuarioService.delete(u);
+               
+            }catch(UsuarioNotFoundException ex){
+                beanUtilidades.creaMensaje("usuario inexistente", FacesMessage.SEVERITY_ERROR);
+                return null;
+            }
+        
         }
         
          beanUtilidades.creaMensaje("usuarios borrado ", FacesMessage.SEVERITY_INFO);

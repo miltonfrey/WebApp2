@@ -1,6 +1,7 @@
 
 package controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -18,7 +19,7 @@ import pojos.utillidades.BeanUtilidades;
 
 @Named(value = "mensajesRecibidosUserController")
 @ViewScoped
-public class MensajesRecibidosUserController {
+public class MensajesRecibidosUserController implements Serializable{
 
     @Inject 
     private BeanUtilidades beanUtilidades;
@@ -129,7 +130,9 @@ public class MensajesRecibidosUserController {
         activaRecibido=true;
         temaRecibido=selectedMensajeRecibido.getTema();
         textAreaRecibido=selectedMensajeRecibido.getTexto();
+        selectedMensajeRecibido.setLeidoDestino("si");
         mensajeService.leerMensajeRecibido(selectedMensajeRecibido);
+        actualizarRecibidos();
          return null;
     }
      

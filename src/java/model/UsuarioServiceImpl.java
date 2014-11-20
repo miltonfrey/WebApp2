@@ -29,7 +29,10 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
     
     @Override
-    public void delete(Usuario u){
+    public void delete(Usuario u) throws UsuarioNotFoundException{
+        
+        
+        u=find(u.getLogin());
         
         usuarioDao.delete(u);
        

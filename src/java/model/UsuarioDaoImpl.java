@@ -6,6 +6,7 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.swing.plaf.basic.BasicBorders;
 import pojos.Usuario;
 
 
@@ -35,6 +36,8 @@ public class UsuarioDaoImpl implements UsuarioDao{
     
     @Override
     public void delete(Usuario u) {
+        
+        
         
         entityManager.remove(u);
         

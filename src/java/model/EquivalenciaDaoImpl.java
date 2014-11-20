@@ -84,13 +84,13 @@ public class EquivalenciaDaoImpl implements EquivalenciaDao{
     
     public void modificaContrato(Contrato c){
         
-        entityManager.persist(c);
+        entityManager.merge(c);
       
     }
     @Override
     public List<Contrato> listaContratos(Movilidad m){
         
-        return entityManager.createQuery("select c from Contrato c where c.idMovilidad=:movilidad").setParameter("movilidad", m.getCodMovilidad()).getResultList();
+        return entityManager.createQuery("select c from Contrato c where c.idMovilidad=:movilidad").setParameter("movilidad", m).getResultList();
                 
     }
     @Override

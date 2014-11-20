@@ -10,8 +10,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import pojos.Asignatura;
 import pojos.Contrato;
 import pojos.Equivalencia;
@@ -29,7 +29,7 @@ import pojos.utillidades.EquivalenciaRevisada;
 @Stateless
 public class EquivalenciaServiceImpl implements EquivalenciaService{
 
-    @EJB
+    @Inject
     private EquivalenciaDao equivalenciaDao;
     
    
@@ -88,7 +88,9 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
     }
     
     @Override
-    public void modificaContrato(Contrato c){
+    public void modificaContrato(Contrato c)throws ContratoNotFoundException{
+        
+        c=findContrato(c.getIdContrato());
         equivalenciaDao.modificaContrato(c);
     }
     @Override
@@ -97,9 +99,9 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
         return equivalenciaDao.listaContratos(m);
     }
     @Override
-    public void eliminaContrato(Contrato c){
+    public void eliminaContrato(Contrato c)throws ContratoNotFoundException{
         
-        
+        c=findContrato(c.getIdContrato()); 
         equivalenciaDao.eliminaContrato(c);
        
     }
@@ -167,8 +169,8 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
     @Override  
     public List<Equivalencia> equivalenciasPublicas(String Universidad){
         
-        ArrayList<Equivalencia> listaEquivalencias=(ArrayList < Equivalencia >)equivalenciaDao.equivalenciasPublicas(Universidad);
-        Iterator i;
+        return equivalenciaDao.equivalenciasPublicas(Universidad);
+        
        /* for(Equivalencia e:listaEquivalencias){
             Hibernate.initialize(e.getGrupoAsignaturaA().getMiembroGrupoAsignaturaAs());
             i=e.getGrupoAsignaturaA().getMiembroGrupoAsignaturaAs().iterator();
@@ -184,7 +186,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
                 Hibernate.initialize(m.getAsignatura());
             }
         }*/
-        return listaEquivalencias;
+        
     }
     
     @Override
@@ -232,13 +234,13 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
             crearGrupoAsignaturasB(e.getGrupoAsignaturaB());
           
         }
-        
+         
         creaContrato(c);
         
     }
     
     @Override
-    public ArrayList<Equivalencia> editarContrato(ArrayList<Equivalencia> listaAuxEquivalencias,Contrato c){
+    public ArrayList<Equivalencia> editarContrato(ArrayList<Equivalencia> listaAuxEquivalencias,Contrato c) throws ContratoNotFoundException{
         
         ArrayList<Equivalencia> listaCopia=new ArrayList<Equivalencia>();
                

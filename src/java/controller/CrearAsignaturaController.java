@@ -277,6 +277,7 @@ public class CrearAsignaturaController implements Serializable{
                
         Asignatura a=new Asignatura();
         a.setAsignaturaPK(id);
+        a.setNombreAsignatura(nombreAsignatura);
         a.setCreditos(creditosAsignatura.shortValue());
         a.setFacultad(facultadAsignatura);
         a.setInfoAsigantura(infoAsignatura);
@@ -288,7 +289,7 @@ public class CrearAsignaturaController implements Serializable{
         try{
             
             asignaturaService.crearAsignatura(a);
-        }catch(Exception ex){
+        }catch(RuntimeException ex){
             
             beanUtilidades.creaMensaje("La asignatura ya existe", FacesMessage.SEVERITY_ERROR);
             return null;

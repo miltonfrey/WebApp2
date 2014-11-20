@@ -98,7 +98,7 @@ public class MensajeDaoImpl implements MensajeDao{
       @Override          
       public List<Mensaje> mensajesEnviadosTotal(String origen){
           
-          Query q=entityManager.createQuery("select m from Mensaje m where m.origen=:origen and m.eliminadoOrigen='no' order by m.fecha desc");
+          Query q=entityManager.createQuery("select m from Mensaje m where m.origen.login=:origen and m.eliminadoOrigen='no' order by m.fecha desc");
           q.setParameter("origen", origen);
           return q.getResultList();
       }

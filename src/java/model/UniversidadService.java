@@ -17,9 +17,9 @@ public interface UniversidadService {
     public List<Universidad>listaUniversidades();
     public Pais findPais(String pais) throws PaisException;
     public void insertarPais(String pais);
-    public void deletePais(Pais p);
+    public void deletePais(Pais p)throws PaisException;
     public List<Universidad> listar();
-    public void delete(Universidad u);
+    public void delete(Universidad u)throws UniversidadException;
     
     public void insertarUniversidad(Universidad u);
     public void actualizar(Universidad u);

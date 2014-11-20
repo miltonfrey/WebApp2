@@ -2,6 +2,7 @@
 package controller;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -10,6 +11,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import model.UniversidadService;
+import pojos.Exceptions.PaisException;
 import pojos.Pais;
 import pojos.utillidades.BeanUtilidades;
 
@@ -94,7 +96,7 @@ public class PaisController implements Serializable{
           universidadService.deletePais(pais);
           
           
-      }catch(RuntimeException ex){
+      }catch(PaisException|RuntimeException ex){
           
           beanUtilidades.creaMensaje("se ha producido un error eliminando el país", FacesMessage.SEVERITY_ERROR);
           return null;

@@ -8,6 +8,7 @@ package pojos;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -39,7 +40,7 @@ public class Pais implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nombre")
     private String nombre;
-    @OneToMany(mappedBy = "pais", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "pais", fetch = FetchType.LAZY,cascade =  CascadeType.REMOVE)
     private Set<Universidad> universidadSet;
 
     public Pais() {

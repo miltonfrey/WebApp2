@@ -52,29 +52,27 @@ public class AsignaturaPK implements Serializable {
         this.nombreUniversidad = nombreUniversidad;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (int) codAsignatura;
-        hash += (nombreUniversidad != null ? nombreUniversidad.hashCode() : 0);
-        return hash;
-    }
+    
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof AsignaturaPK)) {
-            return false;
-        }
-        AsignaturaPK other = (AsignaturaPK) object;
-        if (this.codAsignatura != other.codAsignatura) {
-            return false;
-        }
-        if ((this.nombreUniversidad == null && other.nombreUniversidad != null) || (this.nombreUniversidad != null && !this.nombreUniversidad.equals(other.nombreUniversidad))) {
-            return false;
-        }
-        return true;
-    }
+   public boolean equals(Object other) {
+         if ( (this == other ) ) return true;
+		 if ( (other == null ) ) return false;
+		 if ( !(other instanceof AsignaturaPK) ) return false;
+		 AsignaturaPK castOther = ( AsignaturaPK ) other; 
+         
+		 return (this.getCodAsignatura()==castOther.getCodAsignatura())
+ && ( (this.getNombreUniversidad()==castOther.getNombreUniversidad()) || ( this.getNombreUniversidad()!=null && castOther.getNombreUniversidad()!=null && this.getNombreUniversidad().equals(castOther.getNombreUniversidad()) ) );
+   }
+   
+   
+   public int hashCode() {
+         int result = 17;
+         
+         result = 37 * result + this.getCodAsignatura();
+         result = 37 * result + ( getNombreUniversidad() == null ? 0 : this.getNombreUniversidad().hashCode() );
+         return result;
+   }   
+
 
     @Override
     public String toString() {

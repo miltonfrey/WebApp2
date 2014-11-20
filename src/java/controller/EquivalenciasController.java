@@ -388,8 +388,16 @@ public class EquivalenciasController implements Serializable{
         
         selectedContrato.setEstado(apruebaOrechaza);
         
-            
+            try{
             equivalenciaService.modificaContrato(selectedContrato);
+            }catch(ContratoNotFoundException ex){
+                try{
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/verMovilidades.xhtml");
+            }catch(IOException ex2){
+                    
+                    }
+        }
+                
             
         beanUtilidades.creaMensaje("contrato modificado correctamente, se le ha enviado un mensaje al usuario", FacesMessage.SEVERITY_INFO);
         Mensaje m= new Mensaje();
