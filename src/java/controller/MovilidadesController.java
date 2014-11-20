@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -52,7 +52,7 @@ public class MovilidadesController implements Serializable{
     private String changeEstado;
     
     private Movilidad selectedMovilidad;
-    private ArrayList<Movilidad>listaMovilidades;
+    private List<Movilidad>listaMovilidades;
     private ArrayList<Movilidad> filteredMovilidades;
     private ArrayList<Movilidad> selectedMovilidades;
    
@@ -65,7 +65,7 @@ public class MovilidadesController implements Serializable{
        HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
       
        usuario=(Usuario)session.getAttribute("admin");
-       listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
+       setListaMovilidades(movilidadService.listarTodasMovilidades());
       
        }
 
@@ -101,6 +101,8 @@ public class MovilidadesController implements Serializable{
         return selectedMovilidades;
     }
 
+    
+    
     public void setSelectedMovilidades(ArrayList<Movilidad> selectedMovilidades) {
         this.selectedMovilidades = selectedMovilidades;
     }
@@ -124,16 +126,16 @@ public class MovilidadesController implements Serializable{
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    public ArrayList<Movilidad> getListaMovilidades() {
-        Collections.reverse(listaMovilidades);
+
+    public List<Movilidad> getListaMovilidades() {
         return listaMovilidades;
     }
 
-    public void setListaMovilidades(ArrayList<Movilidad> listaMovilidades) {
+    public void setListaMovilidades(List<Movilidad> listaMovilidades) {
         this.listaMovilidades = listaMovilidades;
     }
-
+    
+   
     public ArrayList<Movilidad> getFilteredMovilidades() {
         return filteredMovilidades;
     }
@@ -182,7 +184,7 @@ public class MovilidadesController implements Serializable{
         movilidadService.crearMovilidad(m);
         }catch(RuntimeException ex){
             beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
-            listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
+            setListaMovilidades(movilidadService.listarTodasMovilidades());
             return "verMovilidades.xhtml";
         }
                 
@@ -222,7 +224,7 @@ public class MovilidadesController implements Serializable{
     
      public void actualizarTodasMovilidades(){
         
-        listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
+        setListaMovilidades(movilidadService.listarTodasMovilidades());
         
     }
     

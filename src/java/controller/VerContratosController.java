@@ -4,6 +4,7 @@ package controller;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -47,7 +48,7 @@ public class VerContratosController implements Serializable{
     
     
     
-    private ArrayList<Contrato> listaContratos;
+    private List<Contrato> listaContratos;
     private ArrayList<Contrato> filteredContratos;
     private ArrayList<Contrato> selectedContratos;
     private Contrato selectedContrato;
@@ -65,7 +66,7 @@ public class VerContratosController implements Serializable{
            selectedMovilidad=(Movilidad)context.getSessionMap().get("movilidad");
            context.getSessionMap().remove("Movilidad");
            selectedMovilidad=movilidadService.findMovilidad(selectedMovilidad.getCodMovilidad());
-           listaContratos=(ArrayList < Contrato >)equivalenciaService.listaContratos(selectedMovilidad);
+           setListaContratos(equivalenciaService.listaContratos(selectedMovilidad));
            
        }
        else{
@@ -80,17 +81,16 @@ public class VerContratosController implements Serializable{
    
    
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    
 
-    public ArrayList<Contrato> getListaContratos() {
+    public List<Contrato> getListaContratos() {
         return listaContratos;
     }
 
-    public void setListaContratos(ArrayList<Contrato> listaContratos) {
+    public void setListaContratos(List<Contrato> listaContratos) {
         this.listaContratos = listaContratos;
     }
-
+    
+    
     public ArrayList<Contrato> getFilteredContratos() {
         return filteredContratos;
     }
@@ -135,7 +135,7 @@ public class VerContratosController implements Serializable{
             try{
             c=equivalenciaService.findContrato(c.getIdContrato());
             }catch(ContratoNotFoundException ex){
-             listaContratos=(ArrayList<Contrato>)equivalenciaService.listaContratos(selectedMovilidad);
+             setListaContratos(equivalenciaService.listaContratos(selectedMovilidad));
               beanUtilidades.creaMensaje("contrato no encontrado", FacesMessage.SEVERITY_ERROR);
              return null;
             }
@@ -157,7 +157,7 @@ public class VerContratosController implements Serializable{
         
         
         beanUtilidades.creaMensaje("contrato eliminado correctamente", FacesMessage.SEVERITY_INFO);
-        listaContratos=(ArrayList<Contrato>)equivalenciaService.listaContratos(selectedMovilidad);
+        setListaContratos(equivalenciaService.listaContratos(selectedMovilidad));
         selectedContratos=null;
         
         return null;

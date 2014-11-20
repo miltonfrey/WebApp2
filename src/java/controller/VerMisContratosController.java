@@ -3,6 +3,7 @@ package controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -46,7 +47,7 @@ public class VerMisContratosController implements Serializable{
     
     
     
-    private ArrayList<Contrato> listaContratos;
+    private List<Contrato> listaContratos;
     private ArrayList<Contrato> filteredContratos;
     private Contrato selectedContrato;
     
@@ -95,17 +96,15 @@ public class VerMisContratosController implements Serializable{
     public void setVerAceptado(boolean verAceptado) {
         this.verAceptado = verAceptado;
     }
-    
-    
 
-    public ArrayList<Contrato> getListaContratos() {
+    public List<Contrato> getListaContratos() {
         return listaContratos;
     }
 
-    public void setListaContratos(ArrayList<Contrato> listaContratos) {
+    public void setListaContratos(List<Contrato> listaContratos) {
         this.listaContratos = listaContratos;
     }
-
+    
     public ArrayList<Contrato> getFilteredContratos() {
         return filteredContratos;
     }
@@ -173,7 +172,7 @@ public class VerMisContratosController implements Serializable{
         visibleContratos=true;
         
         
-        listaContratos=(ArrayList<Contrato>)equivalenciaService.listaContratos(selectedMovilidad);
+        setListaContratos(equivalenciaService.listaContratos(selectedMovilidad));
         
         if(listaContratos.isEmpty()){
         nuevo=true;

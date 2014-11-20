@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -50,7 +51,7 @@ public class MisMovilidadesController implements Serializable{
     
     
     private Movilidad selectedMovilidad;
-    private ArrayList<Movilidad> listaMisMovilidades;
+    private List<Movilidad> listaMisMovilidades;
     private ArrayList<Movilidad> filteredMovilidades;
     
    
@@ -62,7 +63,7 @@ public class MisMovilidadesController implements Serializable{
     
        HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
        usuario=(Usuario)session.getAttribute("user");
-       listaMisMovilidades=(ArrayList < Movilidad >)movilidadService.listarMisMovilidades(usuario.getLogin());
+       setListaMisMovilidades(movilidadService.listarMisMovilidades(usuario.getLogin()));
        Collections.reverse(listaMisMovilidades);
        
         
@@ -85,15 +86,16 @@ public class MisMovilidadesController implements Serializable{
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    public ArrayList<Movilidad> getListaMisMovilidades() {
-         
-         return listaMisMovilidades;
+
+    public List<Movilidad> getListaMisMovilidades() {
+        return listaMisMovilidades;
     }
 
-    public void setListaMisMovilidades(ArrayList<Movilidad> listaMisMovilidades) {
+    public void setListaMisMovilidades(List<Movilidad> listaMisMovilidades) {
         this.listaMisMovilidades = listaMisMovilidades;
     }
+    
+   
 
     public ArrayList<Movilidad> getFilteredMovilidades() {
         return filteredMovilidades;
@@ -172,7 +174,7 @@ public class MisMovilidadesController implements Serializable{
     }
     public void actualizar(){
         
-        listaMisMovilidades=(ArrayList < Movilidad >)movilidadService.listarMisMovilidades(usuario.getLogin());
+        setListaMisMovilidades(movilidadService.listarMisMovilidades(usuario.getLogin()));
         Collections.reverse(listaMisMovilidades);
     }
     

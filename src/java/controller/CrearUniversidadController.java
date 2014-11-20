@@ -39,7 +39,7 @@ public class CrearUniversidadController {
     private String web;
     private String paisStrEdit;
     
-    private ArrayList<Pais> listaPaises;
+    private List<Pais> listaPaises;
     private List<Universidad> listaUniversidades;
     private ArrayList<Universidad> selectedUniversidades;
     
@@ -110,16 +110,18 @@ public class CrearUniversidadController {
     public void setPaisStrEdit(String paisStrEdit) {
         this.paisStrEdit = paisStrEdit;
     }
-    
-    
 
-    public ArrayList<Pais> getListaPaises() {
+    public List<Pais> getListaPaises() {
         return listaPaises;
     }
 
-    public void setListaPaises(ArrayList<Pais> listaPaises) {
+    public void setListaPaises(List<Pais> listaPaises) {
         this.listaPaises = listaPaises;
     }
+    
+    
+
+    
 
     public List<Universidad> getListaUniversidades() {
         return listaUniversidades;
@@ -228,7 +230,7 @@ public class CrearUniversidadController {
         info="";
         //paisStr="";
         codUniversidad="";
-        listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
+        listaUniversidades=universidadService.listarPorPais(paisStr);
         return null;
         
     }
@@ -255,14 +257,14 @@ public class CrearUniversidadController {
                 try{
                     universidadService.delete(u);
                 }catch(RuntimeException ex){
-                    listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
+                    listaUniversidades=universidadService.listarPorPais(paisStr);
                    beanUtilidades.creaMensaje("Error eliminando", FacesMessage.SEVERITY_INFO); 
                    
                     return "crearUniversidad.xhtml";
                 }    
             }
             beanUtilidades.creaMensaje("se han eliminado las universidades correctamente", FacesMessage.SEVERITY_INFO);
-            listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
+            listaUniversidades=universidadService.listarPorPais(paisStr);
             checkDetalles=false;
         }
         return null;
@@ -277,7 +279,7 @@ public class CrearUniversidadController {
                     
         try{
         universidadService.actualizar(selectedUniversidad);
-        listaUniversidades=(ArrayList<Universidad>)universidadService.listarPorPais(paisStr);
+        listaUniversidades=universidadService.listarPorPais(paisStr);
         }catch(RuntimeException ex){
             beanUtilidades.creaMensaje("se ha producido un error ", FacesMessage.SEVERITY_ERROR);
             return "crearUniversidad.xhtml";

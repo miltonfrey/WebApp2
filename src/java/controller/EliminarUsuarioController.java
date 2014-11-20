@@ -4,6 +4,7 @@ package controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -29,7 +30,7 @@ public class EliminarUsuarioController implements Serializable{
     }
     
     private ArrayList<Usuario> selectedUsuarios;
-    private ArrayList<Usuario> listaUsuarios;
+    private List<Usuario> listaUsuarios;
     private ArrayList<Usuario> filteredUsuarios;
     
     
@@ -39,6 +40,14 @@ public class EliminarUsuarioController implements Serializable{
         listaUsuarios=new ArrayList<Usuario>();
         listaUsuarios.addAll(usuarioService.listar());
         
+    }
+
+    public List<Usuario> getListaUsuarios() {
+        return listaUsuarios;
+    }
+
+    public void setListaUsuarios(List<Usuario> listaUsuarios) {
+        this.listaUsuarios = listaUsuarios;
     }
 
     
@@ -51,13 +60,6 @@ public class EliminarUsuarioController implements Serializable{
         this.selectedUsuarios = selectedUsuarios;
     }
 
-    public ArrayList<Usuario> getListaUsuarios() {
-        return listaUsuarios;
-    }
-
-    public void setListaUsuarios(ArrayList<Usuario> listaUsuarios) {
-        this.listaUsuarios = listaUsuarios;
-    }
 
     public ArrayList<Usuario> getFilteredUsuarios() {
         return filteredUsuarios;
@@ -80,7 +82,7 @@ public class EliminarUsuarioController implements Serializable{
         }
         
          beanUtilidades.creaMensaje("usuarios borrado ", FacesMessage.SEVERITY_INFO);
-        setListaUsuarios((ArrayList < Usuario >)usuarioService.listar());
+        setListaUsuarios(usuarioService.listar());
         return null;
       
         

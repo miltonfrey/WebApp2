@@ -2,7 +2,7 @@
 package controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -39,16 +39,16 @@ public class EquivalenciasPublicasController implements Serializable{
     }
     
     
-    private ArrayList<Pais> listaPaises;
+    private List<Pais> listaPaises;
     private String paisStr;
-    private ArrayList<Universidad> listaUniversidad;
+    private List<Universidad> listaUniversidad;
     private String universidadStr;
     private Universidad universidad;
     
     private boolean checkPais;
    private boolean checkUni;
     
-    private ArrayList<Equivalencia> listaEquivalencias;
+    private List<Equivalencia> listaEquivalencias;
     
     private Equivalencia selectedEquivalencia; 
     
@@ -61,22 +61,28 @@ public class EquivalenciasPublicasController implements Serializable{
        
     }
 
-    public ArrayList<Equivalencia> getListaEquivalencias() {
-        return listaEquivalencias;
-    }
-
-    
-
-    public void setListaEquivalencias(ArrayList<Equivalencia> listaEquivalencias) {
-        this.listaEquivalencias = listaEquivalencias;
-    }
-
-    public ArrayList<Pais> getListaPaises() {
+    public List<Pais> getListaPaises() {
         return listaPaises;
     }
 
-    public void setListaPaises(ArrayList<Pais> listaPaises) {
+    public void setListaPaises(List<Pais> listaPaises) {
         this.listaPaises = listaPaises;
+    }
+
+    public List<Universidad> getListaUniversidad() {
+        return listaUniversidad;
+    }
+
+    public void setListaUniversidad(List<Universidad> listaUniversidad) {
+        this.listaUniversidad = listaUniversidad;
+    }
+
+    public List<Equivalencia> getListaEquivalencias() {
+        return listaEquivalencias;
+    }
+
+    public void setListaEquivalencias(List<Equivalencia> listaEquivalencias) {
+        this.listaEquivalencias = listaEquivalencias;
     }
 
     public String getPaisStr() {
@@ -87,13 +93,7 @@ public class EquivalenciasPublicasController implements Serializable{
         this.paisStr = paisStr;
     }
 
-    public ArrayList<Universidad> getListaUniversidad() {
-        return listaUniversidad;
-    }
-
-    public void setListaUniversidad(ArrayList<Universidad> listaUniversidad) {
-        this.listaUniversidad = listaUniversidad;
-    }
+   
 
     public String getUniversidadStr() {
         return universidadStr;
@@ -153,7 +153,7 @@ public class EquivalenciasPublicasController implements Serializable{
     public void onChangePais(){
         
         checkPais=true;
-        listaUniversidad=(ArrayList<Universidad>)universidadService.listarPorPais(paisStr);
+        listaUniversidad=universidadService.listarPorPais(paisStr);
         checkUni=false;
         mostrarInfo=false;
     }
@@ -176,7 +176,7 @@ public class EquivalenciasPublicasController implements Serializable{
             universidadStr="";
             return null;
         }
-        listaEquivalencias=(ArrayList < Equivalencia >)equivalenciaService.equivalenciasPublicas(universidadStr);
+        listaEquivalencias=equivalenciaService.equivalenciasPublicas(universidadStr);
         mostrarInfo=true;
         return null;
     }

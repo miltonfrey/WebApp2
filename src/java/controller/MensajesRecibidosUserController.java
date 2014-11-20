@@ -2,6 +2,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
@@ -36,7 +37,7 @@ public class MensajesRecibidosUserController {
     private boolean activaTexto;
     
     private Mensaje selectedMensajeRecibido;
-    private ArrayList<Mensaje> listaMensajesRecibidos;
+    private List<Mensaje> listaMensajesRecibidos;
     private ArrayList<Mensaje> selectedMensajesRecibidos;
     private ArrayList<Mensaje> filteredMensajesRecibidos;
     
@@ -49,7 +50,7 @@ public class MensajesRecibidosUserController {
     public void init(){
         HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         user=(Usuario)session.getAttribute("user");
-        setListaMensajesRecibidos((ArrayList<Mensaje>)mensajeService.mensajesRecibidos("admin", user.getLogin()));
+        setListaMensajesRecibidos(mensajeService.mensajesRecibidos("admin", user.getLogin()));
     }
 
     
@@ -94,13 +95,15 @@ public class MensajesRecibidosUserController {
         this.selectedMensajeRecibido = selectedMensajeRecibido;
     }
 
-    public ArrayList<Mensaje> getListaMensajesRecibidos() {
+    public List<Mensaje> getListaMensajesRecibidos() {
         return listaMensajesRecibidos;
     }
 
-    public void setListaMensajesRecibidos(ArrayList<Mensaje> listaMensajesRecibidos) {
+    public void setListaMensajesRecibidos(List<Mensaje> listaMensajesRecibidos) {
         this.listaMensajesRecibidos = listaMensajesRecibidos;
     }
+
+   
 
     public ArrayList<Mensaje> getSelectedMensajesRecibidos() {
         return selectedMensajesRecibidos;
@@ -132,7 +135,7 @@ public class MensajesRecibidosUserController {
      
      public void actualizarRecibidos(){
      
-       setListaMensajesRecibidos((ArrayList<Mensaje>)mensajeService.mensajesRecibidos("admin", user.getLogin()));
+       setListaMensajesRecibidos(mensajeService.mensajesRecibidos("admin", user.getLogin()));
         for(Mensaje m:selectedMensajesRecibidos){
             
             if(selectedMensajeRecibido!=null&&m.getIdmensaje().equals(selectedMensajeRecibido.getIdmensaje()))

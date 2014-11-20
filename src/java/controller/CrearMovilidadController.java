@@ -7,9 +7,9 @@ package controller;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -78,7 +78,7 @@ public class CrearMovilidadController implements Serializable{
     private String selectedUniversidad;
     private Universidad universidad;
     
-    private ArrayList<Universidad> listaUniversidades;
+    private List<Universidad> listaUniversidades;
     
     private boolean checkPais;
 
@@ -139,10 +139,7 @@ public class CrearMovilidadController implements Serializable{
         this.selectedUniversidad = selectedUniversidad;
     }
 
-    public ArrayList<Universidad> getListaUniversidades() {
-        return listaUniversidades;
-    }
-
+    
     public Universidad getUniversidad() {
         return universidad;
     }
@@ -150,12 +147,18 @@ public class CrearMovilidadController implements Serializable{
     public void setUniversidad(Universidad universidad) {
         this.universidad = universidad;
     }
+
+    public List<Universidad> getListaUniversidades() {
+        return listaUniversidades;
+    }
+
+    public void setListaUniversidades(List<Universidad> listaUniversidades) {
+        this.listaUniversidades = listaUniversidades;
+    }
     
     
 
-    public void setListaUniversidades(ArrayList<Universidad> listaUniversidades) {
-        this.listaUniversidades = listaUniversidades;
-    }
+   
 
     public boolean isCheckPais() {
         return checkPais;
@@ -169,7 +172,7 @@ public class CrearMovilidadController implements Serializable{
     public void onDropboxChangePais(){
        
        checkPais=true;
-       listaUniversidades=(ArrayList<Universidad>)universidadService.listarPorPais(selectedPais);
+       listaUniversidades=universidadService.listarPorPais(selectedPais);
      
    }
     

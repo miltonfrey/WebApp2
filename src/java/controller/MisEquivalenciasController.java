@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -68,8 +69,8 @@ public class MisEquivalenciasController implements Serializable{
     Equivalencia equivalencia;
     
     
-    private ArrayList<Asignatura> listaAsignaturasFic;
-    private ArrayList<Asignatura>listaAsignaturasUniversidad;
+    private List<Asignatura> listaAsignaturasFic;
+    private List<Asignatura>listaAsignaturasUniversidad;
    
     
     private ArrayList<Equivalencia> listaAuxEquivalencias=new ArrayList<Equivalencia>();
@@ -117,8 +118,8 @@ public class MisEquivalenciasController implements Serializable{
         if(context.getSessionMap().containsKey("movilidad")){
         selectedMovilidad=(Movilidad)context.getSessionMap().get("movilidad");
         context.getSessionMap().remove("movilidad");
-        listaAsignaturasFic=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad("UDC");
-        listaAsignaturasUniversidad=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(selectedMovilidad.getNombreUniversidad().getNombre());
+        setListaAsignaturasFic(asignaturaService.listarAsignaturasPorUniversidad("UDC"));
+        setListaAsignaturasUniversidad(asignaturaService.listarAsignaturasPorUniversidad(selectedMovilidad.getNombreUniversidad().getNombre()));
         
          if(context.getSessionMap().containsKey("contrato")){
         selectedContrato=(Contrato)context.getSessionMap().get("contrato");
@@ -132,8 +133,8 @@ public class MisEquivalenciasController implements Serializable{
                     
                     }
         }
-        listaAuxEquivalencias.addAll(c.getEquivalenciaSet());   //(ArrayList<Equivalencia>)equivalenciaService.listarEquivalenciasPorContrato(selectedContrato.getIdContrato());
-        listaAuxEquivalenciasComparado.addAll(c.getEquivalenciaSet()); //=(ArrayList<Equivalencia>)equivalenciaService.listarEquivalenciasPorContrato(selectedContrato.getIdContrato());
+        listaAuxEquivalencias.addAll(c.getEquivalenciaSet());   
+        listaAuxEquivalenciasComparado.addAll(c.getEquivalenciaSet()); 
         //lo comparamos igual en la version b
               creditosA=equivalenciaService.totalCreditos(listaAuxEquivalencias)[0];
               creditosB=equivalenciaService.totalCreditos(listaAuxEquivalencias)[1];
@@ -142,7 +143,7 @@ public class MisEquivalenciasController implements Serializable{
              
         if(context.getSessionMap().containsKey("ultimo")){
            ultimo=true;
-        //listaAuxEquivalenciasComparado.//=(ArrayList<Equivalencia>)equivalenciaService.listarEquivalenciasPorContrato(selectedContrato.getIdContrato());
+        
         context.getSessionMap().remove("ultimo");
         }
         
@@ -238,21 +239,23 @@ public class MisEquivalenciasController implements Serializable{
         this.selectedAsignaturasUni = selectedAsignaturasUni;
     }
 
-    public ArrayList<Asignatura> getListaAsignaturasFic() {
+    public List<Asignatura> getListaAsignaturasFic() {
         return listaAsignaturasFic;
     }
 
-    public void setListaAsignaturasFic(ArrayList<Asignatura> listaAsignaturasFic) {
+    public void setListaAsignaturasFic(List<Asignatura> listaAsignaturasFic) {
         this.listaAsignaturasFic = listaAsignaturasFic;
     }
 
-    public ArrayList<Asignatura> getListaAsignaturasUniversidad() {
+    public List<Asignatura> getListaAsignaturasUniversidad() {
         return listaAsignaturasUniversidad;
     }
 
-    public void setListaAsignaturasUniversidad(ArrayList<Asignatura> listaAsignaturasUniversidad) {
+    public void setListaAsignaturasUniversidad(List<Asignatura> listaAsignaturasUniversidad) {
         this.listaAsignaturasUniversidad = listaAsignaturasUniversidad;
     }
+
+  
 
     public Movilidad getSelectedMovilidad() {
         return selectedMovilidad;

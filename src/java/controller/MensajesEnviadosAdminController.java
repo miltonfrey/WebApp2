@@ -3,6 +3,7 @@ package controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
@@ -38,7 +39,7 @@ public class MensajesEnviadosAdminController implements Serializable{
     private boolean activaTexto;
     
     private Mensaje selectedMensajeEnviado;
-    private ArrayList<Mensaje> listaMensajesEnviados;
+    private List<Mensaje> listaMensajesEnviados;
     private ArrayList<Mensaje> selectedMensajesEnviados;
     private ArrayList<Mensaje> filteredMensajesEnviados;
     
@@ -51,7 +52,7 @@ public class MensajesEnviadosAdminController implements Serializable{
     public void init(){
         HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         user=(Usuario)session.getAttribute("admin");
-        setListaMensajesEnviados((ArrayList<Mensaje>)mensajeService.mensajesEnviadosTotal("admin"));
+        setListaMensajesEnviados(mensajeService.mensajesEnviadosTotal("admin"));
     }
 
     
@@ -96,14 +97,15 @@ public class MensajesEnviadosAdminController implements Serializable{
         this.selectedMensajeEnviado = selectedMensajeEnviado;
     }
 
-    public ArrayList<Mensaje> getListaMensajesEnviados() {
+    public List<Mensaje> getListaMensajesEnviados() {
         return listaMensajesEnviados;
     }
 
-    public void setListaMensajesEnviados(ArrayList<Mensaje> listaMensajesEnviados) {
+    public void setListaMensajesEnviados(List<Mensaje> listaMensajesEnviados) {
         this.listaMensajesEnviados = listaMensajesEnviados;
     }
 
+    
     public ArrayList<Mensaje> getSelectedMensajesEnviados() {
         return selectedMensajesEnviados;
     }
@@ -134,7 +136,7 @@ public class MensajesEnviadosAdminController implements Serializable{
     
     
     public void actualizarEnviados(){
-        setListaMensajesEnviados((ArrayList<Mensaje>)mensajeService.mensajesEnviadosTotal("admin"));
+        setListaMensajesEnviados(mensajeService.mensajesEnviadosTotal("admin"));
         for(Mensaje m:selectedMensajesEnviados){
             
             if(selectedMensajeEnviado!=null&&m.getIdmensaje().equals(selectedMensajeEnviado.getIdmensaje()))

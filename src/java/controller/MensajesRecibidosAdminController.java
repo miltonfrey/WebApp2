@@ -3,6 +3,7 @@ package controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
@@ -38,7 +39,7 @@ public class MensajesRecibidosAdminController implements Serializable{
     private boolean activaTexto;
     
     private Mensaje selectedMensajeRecibido;
-    private ArrayList<Mensaje> listaMensajesRecibidos;
+    private List<Mensaje> listaMensajesRecibidos;
     private ArrayList<Mensaje> selectedMensajesRecibidos;
     private ArrayList<Mensaje> filteredMensajesRecibidos;
     
@@ -57,7 +58,7 @@ public class MensajesRecibidosAdminController implements Serializable{
         
         HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         user=(Usuario)session.getAttribute("admin");
-        setListaMensajesRecibidos((ArrayList<Mensaje>)mensajeService.mensajesRecibidosTotal("admin"));
+        setListaMensajesRecibidos(mensajeService.mensajesRecibidosTotal("admin"));
         
     }
 
@@ -103,13 +104,15 @@ public class MensajesRecibidosAdminController implements Serializable{
         this.selectedMensajeRecibido = selectedMensajeRecibido;
     }
 
-    public ArrayList<Mensaje> getListaMensajesRecibidos() {
+    public List<Mensaje> getListaMensajesRecibidos() {
         return listaMensajesRecibidos;
     }
 
-    public void setListaMensajesRecibidos(ArrayList<Mensaje> listaMensajesRecibidos) {
+    public void setListaMensajesRecibidos(List<Mensaje> listaMensajesRecibidos) {
         this.listaMensajesRecibidos = listaMensajesRecibidos;
     }
+
+    
 
     public ArrayList<Mensaje> getSelectedMensajesRecibidos() {
         return selectedMensajesRecibidos;
@@ -159,7 +162,7 @@ public class MensajesRecibidosAdminController implements Serializable{
      
      public void actualizarRecibidos(){
      
-        setListaMensajesRecibidos((ArrayList<Mensaje>)mensajeService.mensajesRecibidosTotal("admin"));
+        setListaMensajesRecibidos(mensajeService.mensajesRecibidosTotal("admin"));
         for(Mensaje m:selectedMensajesRecibidos){
             
             if(selectedMensajeRecibido!=null&&m.getIdmensaje().equals(selectedMensajeRecibido.getIdmensaje()))

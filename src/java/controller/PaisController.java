@@ -2,7 +2,6 @@
 package controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -82,7 +81,7 @@ public class PaisController implements Serializable{
           
           beanUtilidades.creaMensaje("se ha creado el país correctamente", FacesMessage.SEVERITY_INFO);
           paisStr="";
-          listaPaises=(ArrayList<Pais>)universidadService.listaPaises();
+          setListaPaises(universidadService.listaPaises());
       return null;
       
       
@@ -102,7 +101,7 @@ public class PaisController implements Serializable{
       }
       
       beanUtilidades.creaMensaje("se ha eliminado correctamente el pais", FacesMessage.SEVERITY_INFO);
-      listaPaises=(ArrayList<Pais>)universidadService.listaPaises();
+      setListaPaises(universidadService.listaPaises());
       return null;
   }
   

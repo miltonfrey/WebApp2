@@ -257,7 +257,7 @@ public class CrearAsignaturaController implements Serializable{
         checkUniversidadStr=true;
         checkTabla=true;
         setListaAsignaturas( asignaturaService.listarAsignaturasPorUniversidad(universidadStr));
-        //listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarPorCriterio();
+        
        checkDetalles=false;
        
         
