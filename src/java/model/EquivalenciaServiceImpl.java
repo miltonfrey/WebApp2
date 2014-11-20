@@ -8,8 +8,10 @@ package model;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import pojos.Asignatura;
@@ -224,17 +226,18 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
     @Override
     public void confirmarContrato(ArrayList<Equivalencia> listaAuxEquivalencias,Contrato c){
         
+        Set s1=new HashSet<Equivalencia>();
         for(Equivalencia e:listaAuxEquivalencias){
           
-            c.getEquivalenciaSet().add(e);
+            s1.add(e);
             //e.getContratos().add(c); //No hace falta
             
             crearEquivalencia(e);
             crearGrupoAsignaturasA(e.getGrupoAsignaturaA());
             crearGrupoAsignaturasB(e.getGrupoAsignaturaB());
-          
+             
         }
-         
+        c.setEquivalenciaSet(s1);
         creaContrato(c);
         
     }

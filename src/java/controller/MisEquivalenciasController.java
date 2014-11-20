@@ -343,10 +343,8 @@ public class MisEquivalenciasController implements Serializable{
        
           equivalencia=new Equivalencia();
          GrupoAsignaturaA grupoA=new GrupoAsignaturaA();
-         //grupoA.setMiembroGrupoAsignaturaASet(null);
          GrupoAsignaturaB grupoB=new GrupoAsignaturaB();
-         //grupoB.setMiembroGrupoAsignaturaBSet(null);
-          MiembroGrupoAsignaturaA ma;
+          //MiembroGrupoAsignaturaA ma;
           MiembroGrupoAsignaturaB mb;
         
           
@@ -358,6 +356,9 @@ public class MisEquivalenciasController implements Serializable{
         
         selectedAsignaturasFic=(ArrayList < Asignatura >)dataTable.getSelection();
         selectedAsignaturasUni=(ArrayList<Asignatura>)dataTable2.getSelection();
+        
+         System.out.println(selectedAsignaturasFic.get(0).getNombreAsignatura());
+         System.out.println(selectedAsignaturasFic.get(1).getNombreAsignatura());
         
         if(selectedAsignaturasFic.isEmpty()){
             
@@ -371,26 +372,29 @@ public class MisEquivalenciasController implements Serializable{
         }
        
         
-        
+        Set<MiembroGrupoAsignaturaA> sA=new HashSet();
         for(Asignatura a:selectedAsignaturasFic){
        
-        ma=new MiembroGrupoAsignaturaA();
+       MiembroGrupoAsignaturaA ma=new MiembroGrupoAsignaturaA();
         ma.setAsignatura(a);
-        Set s1=new HashSet();
-        s1.add(ma);
-        ma.setIdGrupoAsignaturaA(grupoA);
-       grupoA.setMiembroGrupoAsignaturaASet(s1);
         
+            System.out.println(sA.add(ma));
+        ma.setIdGrupoAsignaturaA(grupoA);
+       grupoA.setMiembroGrupoAsignaturaASet(sA);
+        
+                  System.out.println("tamaño del set es "+sA.size());
                   creditosA=creditosA+a.getCreditos();                              // con cascade save-update no hace falta salvar el miembro_grupo_asignaturas
         
         }
-        
+        Set sB=new HashSet();
         for(Asignatura a:selectedAsignaturasUni){
             
         mb=new MiembroGrupoAsignaturaB();
         mb.setAsignatura(a);
+        
+        sB.add(mb);
         mb.setIdGrupoAsignaturaB(grupoB);
-        grupoB.getMiembroGrupoAsignaturaBSet().add(mb);
+        grupoB.setMiembroGrupoAsignaturaBSet(sB);
                    creditosB=creditosB+a.getCreditos();
             
         }

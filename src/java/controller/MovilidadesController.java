@@ -181,7 +181,7 @@ public class MovilidadesController implements Serializable{
         
         m.setEstado(changeEstado);
         try{
-        movilidadService.crearMovilidad(m);
+        movilidadService.cambiarMovilidad(m,changeEstado);
         }catch(RuntimeException ex){
             beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
             setListaMovilidades(movilidadService.listarTodasMovilidades());

@@ -228,7 +228,7 @@ public String crearMovilidad(){
               }
               
                catch(RuntimeException ex){
-                 beanUtilidades.creaMensaje("se ha producido un error", null);
+                 beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
                   return "crearMovilidad.xhtml";
               }
              

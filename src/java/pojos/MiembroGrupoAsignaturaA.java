@@ -78,7 +78,7 @@ public class MiembroGrupoAsignaturaA implements Serializable {
         this.asignatura = asignatura;
     }
 
-    @Override
+ /*   @Override
     public int hashCode() {
         int hash = 0;
         hash += (idmiembroGrupoAsignaturaA != null ? idmiembroGrupoAsignaturaA.hashCode() : 0);
@@ -96,7 +96,7 @@ public class MiembroGrupoAsignaturaA implements Serializable {
             return false;
         }
         return true;
-    }
+    }*/
 
     @Override
     public String toString() {

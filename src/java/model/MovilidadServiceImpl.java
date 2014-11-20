@@ -87,7 +87,7 @@ public class MovilidadServiceImpl implements MovilidadService{
     }
     @Override
     public void eliminarMovilidad(Movilidad m){
-        
+        m=findMovilidad(m.getCodMovilidad());
         movilidadDao.eliminarMovilidad(m);
     }
     
@@ -143,8 +143,8 @@ public class MovilidadServiceImpl implements MovilidadService{
                 
                  
                 
-                   ArrayList<Movilidad> aux;
-                   aux=(ArrayList < Movilidad >)listarMisMovilidades(user.getLogin());
+                   ArrayList<Movilidad> aux=new ArrayList<Movilidad>();
+                   aux.addAll(listarMisMovilidades(user.getLogin()));
                       
                     
                     int i=0;
@@ -201,6 +201,15 @@ public class MovilidadServiceImpl implements MovilidadService{
               
               crearMovilidad(m);
               
+    }
+    
+    @Override
+    public void cambiarMovilidad(Movilidad m,String estado){
+        
+        m=findMovilidad(m.getCodMovilidad());
+        m.setEstado(estado);
+        movilidadDao.cambiarMovilidad(m);
+        
     }
     
     
